@@ -1,4 +1,5 @@
-bin
+bin/Debug/
+bin/Release/
 obj
 *~
 *.sln.cache
