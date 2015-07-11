@@ -27,7 +27,10 @@ chmod 744 build
 ./build
 # success?
 mono lib/gtk3-sample.exe
+# make sure all gdk3*.dll files with .dll.config maps
 ```
+
+![Ubuntu Trusty and Windows 10 GTK3 demo](https://github.com/akrisiun/xwt/blog/master/gtk-demos.png "Windows 10 and Ubuntu GTK3 demo")
 
 ### Mono Xmt project Introduction
 
