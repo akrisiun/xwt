@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xwt3", "Xwt\Xwt3.csproj", "{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xwt3.Gtk3", "Xwt.Gtk\Xwt3.Gtk3.csproj", "{3B25FD1F-CEBA-4450-8893-DC330FDB56A7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{92494904-35FA-4DC9-BDE9-3A3E87AC49D3} = {92494904-35FA-4DC9-BDE9-3A3E87AC49D3}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GtkLib", "GtkLib", "{D48CA6A8-7397-457B-934F-DE15D254171B}"
 EndProject

@@ -129,11 +129,8 @@
     <Reference Include="glib3-sharp">
       <HintPath>..\..\lib\glib3-sharp.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Xwt.CoreGtk3\CoreGtk3.csproj">
-      <Project>{9E4B0803-5255-43AA-9C68-0CBDF76DB564}</Project>
-      <Name>CoreGtk3</Name>
-    </ProjectReference>
+    <Reference Include="CoreGtk3">
+      <HintPath>..\..\lib\CoreGtk3.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

@@ -17,6 +17,18 @@ msbuild Xwt-Gtk3.sln
 This is Windows 32 build.  
 Windows 64 GTK+ 3 build information available at: https://github.com/Wesley-Chan/GTK-for-Windows
 
+### Building on Windows (Ubuntu Trusty 14.04)
+
+```
+git clone https://github.com/akrisiun/xwt.git xwt 
+cd xwt
+sudo apt-get install -y mono-devel mono-xbuild libmono-opensystem-c4.0-cil
+chmod 744 build
+./build
+# success?
+mono lib/gtk3-sample.exe
+```
+
 ### Mono Xmt project Introduction
 
 A discussion group for XWT is available here: http://groups.google.com/group/xwt-list

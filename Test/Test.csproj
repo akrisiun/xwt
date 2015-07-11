@@ -69,10 +69,6 @@
       <Project>{9E4B0803-5255-43AA-9C68-0CBDF76DB564}</Project>
       <Name>CoreGtk3</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Xwt.Gtk\Xwt3.Gtk3.csproj">
-      <Project>{3B25FD1F-CEBA-4450-8893-DC330FDB56A7}</Project>
-      <Name>Xwt3.Gtk3</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Xwt\Xwt3.csproj">
       <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
       <Name>Xwt3</Name>
