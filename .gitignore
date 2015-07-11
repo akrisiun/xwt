@@ -13,6 +13,8 @@ obj
 .DS_Store
 test-results
 
+*.bak
 *.pc
 .libs/
+.arch/
 generated-stamp
