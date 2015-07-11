@@ -17,36 +17,39 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\lib\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <OutputPath>..\lib\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET_4_5;GTK3;X86;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>xwt.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\atk-sharp.dll</HintPath>
+    <Reference Include="atk3-sharp">
+      <HintPath>..\lib\atk3-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="cairo-sharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\cairo-sharp.dll</HintPath>
+    <Reference Include="cairo3-sharp">
+      <HintPath>..\lib\cairo3-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="gio-sharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\gio-sharp.dll</HintPath>
+    <Reference Include="gio3-sharp">
+      <HintPath>..\lib\gio3-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\glib-sharp.dll</HintPath>
+    <Reference Include="glib3-sharp">
+      <HintPath>..\lib\glib3-sharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoreGtk3.cs" />
     <Compile Include="gdk\Atom.cs" />
     <Compile Include="gdk\Color.cs" />
     <Compile Include="gdk\Device.cs" />
@@ -1348,6 +1351,7 @@
     <None Include="gtk\gui-thread-check\profiler\Makefile" />
     <None Include="gtk\gui-thread-check\profiler\Makefile.am" />
     <None Include="gtk\gui-thread-check\profiler\Makefile.in" />
+    <None Include="xwt.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

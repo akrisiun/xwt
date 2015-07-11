@@ -1,13 +1,25 @@
-This document is an introduction to XWT, a cross-platform UI toolkit
-for creating desktop applications.
+### Building on Windows 
 
-If you have any question about XWT or do you want to contribute
-a discussion group for XWT is available here:
+Download gtk+-bundle_3.6 (or higher version) from http://www.gtk.org/download/win32.php  
+Get Vagrant Ubuntu trusty (14.02) enviroment, connect with ssh, install mono 4.0 enviroment.
+```
+git clone https://github.com/mono/gtk-sharp.git gtk-sharp
+cd gtk-sharp
+sudo apt-get install libtool autoconf make
+./autogen.sh
+make
+```
+That way you will get gtk-sharp generated .cs files. Then can return to Windows Visual Studio.  
+Build with msbuild:  
+```
+msbuild Xwt-Gtk3.sln
+```
+This is Windows 32 build.  
+Windows 64 GTK+ 3 build information available at: https://github.com/Wesley-Chan/GTK-for-Windows
 
-http://groups.google.com/group/xwt-list
+### Mono Xmt project Introduction
 
-Introduction
-============
+A discussion group for XWT is available here: http://groups.google.com/group/xwt-list
 
 Xwt is a new .NET framework for creating desktop applications that run
 on multiple platforms from the same codebase.   Xwt works by exposing

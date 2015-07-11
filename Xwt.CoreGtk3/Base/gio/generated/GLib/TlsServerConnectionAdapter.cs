@@ -13,7 +13,7 @@ namespace GLib {
 		struct GTlsServerConnectionInterface {
 		}
 
-		static GTlsServerConnectionInterface iface;
+		// static GTlsServerConnectionInterface iface;
 
 		static TlsServerConnectionAdapter ()
 		{

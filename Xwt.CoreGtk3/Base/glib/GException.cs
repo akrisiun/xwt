@@ -19,53 +19,61 @@
 // Boston, MA 02111-1307, USA.
 
 
-namespace GLib {
+namespace GLib
+{
 
-	using System;
-	using System.Runtime.InteropServices;
-	
-	public class GException : Exception
-	{
-		IntPtr errptr;
-	
-		public GException (IntPtr errptr) : base ()
-		{
-			this.errptr = errptr;
-		}
+    using System;
+    using System.Runtime.InteropServices;
 
-		struct GError {
-			public int Domain;
-			public int Code;
-			public IntPtr Msg;
-		}
+    public class GException : Exception
+    {
+        IntPtr errptr;
 
-		public int Code {
-			get {
-				GError err = (GError) Marshal.PtrToStructure (errptr, typeof (GError));
-				return err.Code;
-			}
-		}
+        public GException(IntPtr errptr) : base()
+        {
+            this.errptr = errptr;
+        }
 
-		public int Domain {
-			get {
-				GError err = (GError) Marshal.PtrToStructure (errptr, typeof (GError));
-				return err.Domain;
-			}
-		}
+        struct GError
+        {
+            public int Domain;
+            public int Code;
+            public IntPtr Msg;
+        }
 
-		public override string Message {
-			get {
-				GError err = (GError) Marshal.PtrToStructure (errptr, typeof (GError));
-				return Marshaller.Utf8PtrToString (err.Msg);
-			}
-		}
+        public int Code
+        {
+            get
+            {
+                GError err = (GError)Marshal.PtrToStructure(errptr, typeof(GError));
+                return err.Code;
+            }
+        }
 
-		[DllImport (Global.GLibNativeDll, CallingConvention = CallingConvention.Cdecl)]
-		static extern void g_clear_error (ref IntPtr errptr);
-		~GException ()
-		{
-			g_clear_error (ref errptr);
-		}
-	}
+        public int Domain
+        {
+            get
+            {
+                GError err = (GError)Marshal.PtrToStructure(errptr, typeof(GError));
+                return err.Domain;
+            }
+        }
+
+        public override string Message
+        {
+            get
+            {
+                GError err = (GError)Marshal.PtrToStructure(errptr, typeof(GError));
+                return Marshaller.Utf8PtrToString(err.Msg);
+            }
+        }
+
+        [DllImport(Global.GLibNativeDll, CallingConvention = CallingConvention.Cdecl)]
+        static extern void g_clear_error(ref IntPtr errptr);
+        ~GException()
+        {
+            g_clear_error(ref errptr);
+        }
+    }
 }
 

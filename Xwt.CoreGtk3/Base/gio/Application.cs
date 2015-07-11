@@ -25,43 +25,54 @@ using System.Runtime.InteropServices;
 
 namespace GLib
 {
-	public partial class Application
-	{
-		public Application () : this (null, ApplicationFlags.None)
-		{
-		}
+    public static class Gio
+    {
+        public static string Version()
+        {
+            return typeof(Application).Assembly.FullName;
+        }
+    }
 
-		[DllImport (GioGlobal.GioNativeDll, CallingConvention = CallingConvention.Cdecl)]
-		static extern int g_application_run (IntPtr raw, int argc, IntPtr argv);
+    public partial class Application
+    {
+        public Application() : this(null, ApplicationFlags.None)
+        {
+        }
 
-		public int Run ()
-		{
-			return Run (null, null);
-		}
+        [DllImport(GioGlobal.GioNativeDll, CallingConvention = CallingConvention.Cdecl)]
+        static extern int g_application_run(IntPtr raw, int argc, IntPtr argv);
 
-		public int Run (string program_name, string[] args)
-		{
-			var argc = 0;
-			var argv = IntPtr.Zero;
-			if (program_name != null) {
-				program_name = program_name.Trim ();
-				if (program_name.Length == 0) {
-					throw new ArgumentException ("program_name must not be empty.", "program_name");
-				}
+        public int Run()
+        {
+            return Run(null, null);
+        }
 
-				if (args == null) {
-					throw new ArgumentNullException ("args");
-				}
+        public int Run(string program_name, string[] args)
+        {
+            var argc = 0;
+            var argv = IntPtr.Zero;
+            if (program_name != null)
+            {
+                program_name = program_name.Trim();
+                if (program_name.Length == 0)
+                {
+                    throw new ArgumentException("program_name must not be empty.", "program_name");
+                }
 
-				var prog_args = new string [args.Length + 1];
-				prog_args [0] = program_name;
-				args.CopyTo (prog_args, 1);
+                if (args == null)
+                {
+                    throw new ArgumentNullException("args");
+                }
 
-				argc = prog_args.Length;
-				argv = new Argv (prog_args).Handle;
-			}
+                var prog_args = new string[args.Length + 1];
+                prog_args[0] = program_name;
+                args.CopyTo(prog_args, 1);
 
-			return g_application_run (Handle, argc, argv);
-		}
-	}
+                argc = prog_args.Length;
+                argv = new Argv(prog_args).Handle;
+            }
+
+            return g_application_run(Handle, argc, argv);
+        }
+    }
 }

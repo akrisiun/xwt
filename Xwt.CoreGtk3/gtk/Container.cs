@@ -139,9 +139,14 @@ namespace Gtk {
 				//In that case, just chain to the native base in case it can do something.
 				Container obj = (Container) GLib.Object.TryGetObject (container);
 				if (obj != null) {
-					CallbackInvoker invoker = new CallbackInvoker (cb, data);
-					obj.ForAll (include_internals, invoker);
-				} else {
+
+                    CallbackInvoker invoker = new CallbackInvoker (cb, data);
+
+                    // Gtk.Callback invoker = new Callback(cb, data)
+					// obj.ForAll (include_internals, invoker);
+                    gtksharp_container_base_forall(obj.Handle, include_internals, invoker.Callback, invoker.Data);
+
+                } else {
 					gtksharp_container_base_forall (container, include_internals, cb, data);
 				}
 			} catch (Exception e) {
@@ -156,14 +161,14 @@ namespace Gtk {
 			gtksharp_container_override_forall (gtype.Val, ForallOldCallback);
 		}
 
-		[Obsolete ("Override the ForAll(bool,Gtk.Callback) method instead")]
-		[GLib.DefaultSignalHandler (Type=typeof(Gtk.Container), ConnectionMethod="OverrideForallOld")]
-		protected virtual void ForAll (bool include_internals, CallbackInvoker invoker)
-		{
-			gtksharp_container_base_forall (Handle, include_internals, invoker.Callback, invoker.Data);
-		}
+        //[Obsolete ("Override the ForAll(bool,Gtk.Callback) method instead")]
+        //[GLib.DefaultSignalHandler (Type=typeof(Gtk.Container), ConnectionMethod="OverrideForallOld")]
+        //protected virtual void ForAll(bool include_internals, CallbackInvoker invoker)
+        //{
+        //    gtksharp_container_base_forall(Handle, include_internals, invoker.Callback, invoker.Data);
+        //}
 
-		static void Forall_cb (IntPtr container, bool include_internals, IntPtr cb, IntPtr data)
+        static void Forall_cb (IntPtr container, bool include_internals, IntPtr cb, IntPtr data)
 		{
 			try {
 				//GtkContainer's unmanaged dispose calls forall, but by that time the managed object is gone

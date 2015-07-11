@@ -21,13 +21,20 @@ namespace Pango {
 	using System;
 	using System.Runtime.InteropServices;
 
-	internal struct AttrColor {
-		Attribute.NativeStruct attr;
-		public Color Color;
+    internal struct AttrColor
+    {
+        Attribute.NativeStruct attr;
+        public Color Color;
 
-		public static AttrColor New (IntPtr raw)
-		{
-			return (AttrColor) Marshal.PtrToStructure (raw, typeof (AttrColor));
-		}
-	}
+        public static AttrColor New(IntPtr raw)
+        {
+            AttrColor value = (AttrColor)Marshal.PtrToStructure(raw, typeof(AttrColor));
+            return value;
+        }
+
+        public static AttrColor Empty()
+        {
+            return new AttrColor { attr = default(Attribute.NativeStruct), Color = default(Color) };
+        }
+    }
 }
