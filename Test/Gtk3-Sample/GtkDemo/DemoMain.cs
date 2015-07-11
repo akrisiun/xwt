@@ -45,8 +45,10 @@ namespace GtkDemo
             //Exception thrown: 'System.TypeInitializationException' in CoreGtk3.dll
             //Exception thrown: 'System.TypeInitializationException' in gtk3 - sample.exe
 
-            if (DemoError == null)
-                Application.RunGtk(); // .Run();
+			if (DemoError == null)
+				Application.RunGtk (); // .Run();
+			else if (DemoError.InnerException != null)
+				Console.WriteLine (DemoError.InnerException);
         }
 
         public DemoMain()

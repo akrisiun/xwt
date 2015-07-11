@@ -31,15 +31,22 @@ using Xwt.CairoBackend;
 using Gdk;
 using System.Reflection;
 using System.IO;
+using CoreGtk3 = Gtk.CoreGtk3;
 
 namespace Xwt.GtkBackend
 {
     public class GtkEngine : ToolkitEngineBackend
     {
+        static GtkEngine()
+        {
+            var version = CoreGtk3.Instance.ToString();
+        }
+
         GtkPlatformBackend platformBackend;
 
         public override void InitializeApplication()
         {
+            CoreGtk3.LoadDlls();
             Gtk.Application.Init();
         }
 

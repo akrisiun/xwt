@@ -26,7 +26,7 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyKeyFile("")]
 
 [assembly: AssemblyCompany("Mono")]
-[assembly: AssemblyVersion("3.2.*")]
+[assembly: AssemblyVersion("3.2.0.1")]
 [assembly: AssemblyFileVersion("3.2.0.0")]
 
 // [assembly: AssemblyCopyright("Copyleft 2015")]

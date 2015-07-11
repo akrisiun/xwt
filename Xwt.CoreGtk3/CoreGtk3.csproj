@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <UseMSBuildEngine>False</UseMSBuildEngine>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +32,6 @@
     <AssemblyOriginatorKeyFile>xwt.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="atk3-sharp">
-      <HintPath>..\lib\atk3-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="cairo3-sharp">
       <HintPath>..\lib\cairo3-sharp.dll</HintPath>
     </Reference>
@@ -46,6 +44,9 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="atk3-sharp">
+      <HintPath>..\lib\atk3-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
