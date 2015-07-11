@@ -286,6 +286,10 @@ namespace GtkDemo
                 {
                     object[] atts = type.GetCustomAttributes(typeof(DemoAttribute), false);
                     string file = ((DemoAttribute)atts[0]).Filename;
+					if (!File.Exists(file))
+						file = Path.GetFullPath ("../") + "Test/Gtk3-Sample/GtkDemo/" + file;
+					//  xwt\Test\Gtk3-Sample\GtkDemo\DemoApplicationWindow.cs
+
                     LoadFile(file);
                 }
 
