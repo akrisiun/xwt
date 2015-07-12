@@ -90,7 +90,6 @@
     <Compile Include="TableTests.cs" />
     <Compile Include="VSeparatorTests.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Xwt.CoreGtk3\Base\atk\atk3.csproj">
       <Project>{42fe871a-d8cf-4b29-9aff-b02454e6c976}</Project>
