@@ -59,8 +59,7 @@
       <HintPath>..\lib\Xwt3.dll</HintPath>
     </Reference>
     <Reference Include="Xwt3.Gtk3">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Xwt3.Gtk3.dll</HintPath>
+      <HintPath>..\bin\Xwt3.Gtk3.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
