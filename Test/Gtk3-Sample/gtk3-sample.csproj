@@ -138,4 +138,21 @@
       <Name>CoreGtk3</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GtkDemo\css\css_basics.css" />
+    <EmbeddedResource Include="GtkDemo\css\reset.css" />
+    <Content Include="GtkDemo\images\alphatest.png" />
+    <Content Include="GtkDemo\images\apple-red.png" />
+    <Content Include="GtkDemo\images\background.jpg" />
+    <Content Include="GtkDemo\images\floppybuddy.gif" />
+    <Content Include="GtkDemo\images\gnome-applets.png" />
+    <Content Include="GtkDemo\images\gnome-calendar.png" />
+    <Content Include="GtkDemo\images\gnome-foot.png" />
+    <Content Include="GtkDemo\images\gnome-gimp.png" />
+    <Content Include="GtkDemo\images\gnome-gmush.png" />
+    <Content Include="GtkDemo\images\gnome-gsame.png" />
+    <Content Include="GtkDemo\images\gnu-keys.png" />
+    <Content Include="GtkDemo\images\gtk-logo-rgb.gif" />
+    <Content Include="GtkDemo\images\MonoIcon.png" />
+  </ItemGroup>
 </Project>

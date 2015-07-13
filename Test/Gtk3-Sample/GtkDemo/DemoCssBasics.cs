@@ -42,18 +42,24 @@ namespace GtkDemo
 			container.Add (view);
 			buffer.Changed += OnCssTextChanged;
 
-			using (Stream stream = Assembly.GetExecutingAssembly ().GetManifestResourceStream ("reset.css"))
-			using (StreamReader reader = new StreamReader(stream))
-			{
-				provider_reset.LoadFromData (reader.ReadToEnd());
-			}
+            try {
+                // var names = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+                const string css = "sample.GtkDemo.css.";
 
-			using (Stream stream = Assembly.GetExecutingAssembly ().GetManifestResourceStream ("css_basics.css"))
-			using (StreamReader reader = new StreamReader(stream))
-			{
-				buffer.Text = reader.ReadToEnd();
-			}
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(css + "reset.css"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    provider_reset.LoadFromData(reader.ReadToEnd());
+                }
 
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(css + "css_basics.css"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    buffer.Text = reader.ReadToEnd();
+                }
+
+            }
+            catch { }
 			// TODO: Connect to "parsing-error" signal in CssProvider, added in GTK+ 3.2
 
 			ApplyCss (this, provider_reset, 800);
