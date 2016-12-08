@@ -242,9 +242,11 @@ namespace Xwt
 		public event EventHandler<TreeNodeEventArgs> NodeInserted;
 		public event EventHandler<TreeNodeChildEventArgs> NodeDeleted;
 		public event EventHandler<TreeNodeEventArgs> NodeChanged;
-		public event EventHandler<TreeNodeOrderEventArgs> NodesReordered;
+#pragma warning disable CS0067
+        public event EventHandler<TreeNodeOrderEventArgs> NodesReordered;
+#pragma warning restore CS0067
 
-		public void InitializeBackend (object frontend, ApplicationContext context)
+        public void InitializeBackend (object frontend, ApplicationContext context)
 		{
 		}
 		

@@ -35,11 +35,13 @@ namespace Xwt
 {
 	public struct NodePosition
 	{
-		internal TreePosition ParentPos;
+#pragma warning disable CS0649
+        internal TreePosition ParentPos;
 		internal int Index;
-	}
-	
-	public class TreeNavigator
+#pragma warning restore CS0649
+    }
+
+    public class TreeNavigator
 	{
 		ITreeStoreBackend backend;
 		TreePosition pos;

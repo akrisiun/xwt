@@ -305,9 +305,11 @@ namespace Xwt
 		public event EventHandler<ListRowEventArgs> RowInserted;
 		public event EventHandler<ListRowEventArgs> RowDeleted;
 		public event EventHandler<ListRowEventArgs> RowChanged;
-		public event EventHandler<ListRowOrderEventArgs> RowsReordered;
+#pragma warning disable CS0067
+        public event EventHandler<ListRowOrderEventArgs> RowsReordered;
+#pragma warning restore CS0067
 
-		public void InitializeBackend (object frontend, ApplicationContext context)
+        public void InitializeBackend (object frontend, ApplicationContext context)
 		{
 		}
 		

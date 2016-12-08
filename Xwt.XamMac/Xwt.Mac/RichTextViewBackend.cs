@@ -422,7 +422,7 @@ namespace Xwt.Mac
 				return CreateStringFromHTML (finaltext.ToString (), out docAttributes);
 			} finally {
 				finaltext = null;
-				finalxmlWriter.Dispose ();
+				finalxmlWriter.Close();
 				finalxmlWriter = null;
 				docAttributes = null;
 			}
@@ -622,7 +622,7 @@ namespace Xwt.Mac
 
 		public void Dispose ()
 		{
-			xmlWriter.Dispose ();
+            xmlWriter.Close(); // Dispose();
 		}
 	}
 }

@@ -77,7 +77,7 @@ namespace Xwt
 			Content = content;
 		}
 		
-		[Obsolete ("Use Xwt.FrameBox")]
+		// [Obsolete ("Use Xwt.FrameBox")]
 		[DefaultValue (FrameType.WidgetBox)]
 		public FrameType Type {
 			get { return type; }

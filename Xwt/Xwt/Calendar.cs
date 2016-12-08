@@ -31,9 +31,11 @@ namespace Xwt
 	[BackendType (typeof(ICalendarBackend))]
 	public class Calendar : Widget
 	{
-		EventHandler valueChanged, doubleClick;
+#pragma warning disable CS0169
+        EventHandler valueChanged, doubleClick;
+#pragma warning restore CS0169
 
-		static Calendar ()
+        static Calendar ()
 		{
 			MapEvent (CalendarEvent.ValueChanged, typeof(Calendar), "OnValueChanged");
 		}
