@@ -44,7 +44,7 @@ namespace WpfTest
 			 for more information.
 			 Uncomment the next line to set different IE Emulation modes
 			*/
-			//WebViewEmulationMode = IEEmulationMode.IE11;
+			WebViewEmulationMode = IEEmulationMode.IE11Force;
 
 			App.Run (ToolkitType.Wpf);
 		}

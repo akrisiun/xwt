@@ -106,7 +106,7 @@ namespace Samples
 			forward.Clicked += (sender, e) => wb.GoForward ();
 			loadhtml.Clicked += LoadHtmlString;
 
-			wb.Url = "http://www.xamarin.com";
+			wb.Url = "https://github.com/mono/xwt/";
 		}
 
 		void LoadHtmlString (object sender, EventArgs e)

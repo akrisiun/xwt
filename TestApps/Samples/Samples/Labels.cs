@@ -28,61 +28,64 @@ using Xwt;
 
 namespace Samples
 {
-	public class Labels: VBox
-	{
-		public Labels ()
-		{
-			Label la = new Label ("Simple label");
-			PackStart (la);
+    public class Labels : VBox
+    {
+        public Labels()
+        {
+            Label la = new Label("Simple label");
+            PackStart(la);
 
-			la = new Label ("Centered Text, Centered Text, Centered Text, Centered Text, Centered Text, Centered Text, Centered Text");
-			la.Wrap = WrapMode.Word;
-			la.TextAlignment = Alignment.Center;
-			PackStart (la);
+            la = new Label("Centered Text, Centered Text, Centered Text, Centered Text, Centered Text, Centered Text, Centered Text");
+            la.Wrap = WrapMode.Word;
+            la.TextAlignment = Alignment.Center;
+            PackStart(la);
 
-			la = new Label ("Centered Ellipsized Text, Centered Ellipsized Text, Centered Ellipsized Text, Centered Ellipsized Text, Centered Ellipsized Text");
-			la.TextAlignment = Alignment.Center;
-			la.Ellipsize = EllipsizeMode.End;
-			PackStart (la);
+            la = new Label("Centered Ellipsized Text, Centered Ellipsized Text, Centered Ellipsized Text, Centered Ellipsized Text, Centered Ellipsized Text");
+            la.TextAlignment = Alignment.Center;
+            la.Ellipsize = EllipsizeMode.End;
+            PackStart(la);
 
-			la = new Label ("Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned");
-			la.Wrap = WrapMode.Word;
-			la.TextAlignment = Alignment.Start;
-			PackStart (la);
+            la = new Label("Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned, Left Aligned");
+            la.Wrap = WrapMode.Word;
+            la.TextAlignment = Alignment.Start;
+            PackStart(la);
 
-			la = new Label ("Right Aligned, Right Aligned, Right Aligned, Right Aligned, Right Aligned, Right Aligned, Right Aligned");
-			la.Wrap = WrapMode.Word;
-			la.TextAlignment = Alignment.End;
-			PackStart (la);
+            la = new Label("Right Aligned, Right Aligned, Right Aligned, Right Aligned, Right Aligned, Right Aligned, Right Aligned");
+            la.Wrap = WrapMode.Word;
+            la.TextAlignment = Alignment.End;
+            PackStart(la);
 
-			la = new Label ("Label with red background") {
-				BackgroundColor = new Xwt.Drawing.Color (1, 0, 0),
-				HeightRequest = 40
-			};
-			PackStart (la);
+            la = new Label("Label with red background")
+            {
+                BackgroundColor = new Xwt.Drawing.Color(1, 0, 0),
+                HeightRequest = 40
+            };
+            PackStart(la);
 
-			la = new Label ("Label with red background and blue foreground") {
-				BackgroundColor = new Xwt.Drawing.Color (1, 0, 0),
-				TextColor = new Xwt.Drawing.Color (0, 0, 1)
-			};
-			PackStart (la);
+            la = new Label("Label with red background and blue foreground")
+            {
+                BackgroundColor = new Xwt.Drawing.Color(1, 0, 0),
+                TextColor = new Xwt.Drawing.Color(0, 0, 1)
+            };
+            PackStart(la);
 
-			la = new Label ("A crazy long label text with a lots of content and information in it but fortunately it should appear wrapped");
-			la.Wrap = WrapMode.Word;
-			PackStart (la);
+            la = new Label("A crazy long label text with a lots of content and information in it but fortunately it should appear wrapped");
+            la.Wrap = WrapMode.Word;
+            PackStart(la);
 
-			la = new Label ("Another Label with red background") {
-				BackgroundColor = new Xwt.Drawing.Color (1, 0, 0),
-				TextColor = new Xwt.Drawing.Color (0, 0, 1)
-			};
-			PackStart (la);
+            la = new Label("Another Label with red background")
+            {
+                BackgroundColor = new Xwt.Drawing.Color(1, 0, 0),
+                TextColor = new Xwt.Drawing.Color(0, 0, 1)
+            };
+            PackStart(la);
 
-			la = new Label () { Markup = "Label with <b>bold</b> and <span color='#ff0000'>red</span> text" };
-			PackStart (la);
-			
-			la = new Label () { Markup = "Label with a <a href='http://xamarin.com'>link</a> to a web site." };
-			PackStart (la);
-		}
-	}
+            la = new Label() { Markup = "Label with <b>bold</b> and <span color='#ff0000'>red</span> text" };
+            PackStart(la);
+
+            la = new Label() { Markup = "Label with a <a href='https://github.com/mono/xwt/'>link</a> to a web site." };
+            PackStart(la);
+        }
+    }
 }
 
