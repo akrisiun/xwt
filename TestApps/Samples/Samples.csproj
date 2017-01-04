@@ -130,10 +130,6 @@
       <Project>{c93d746e-1586-4d4f-b411-bf5a966e6a08}</Project>
       <Name>Xwt.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Xwt.XamMac\Xwt.XamMac.csproj">
-      <Project>{b7c1673e-5124-4be5-8d21-ec8b12f85b6b}</Project>
-      <Name>Xwt.XamMac</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Xwt\Xwt.csproj">
       <Project>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</Project>
       <Name>Xwt</Name>
