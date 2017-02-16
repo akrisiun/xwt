@@ -31,42 +31,47 @@ using Xwt.Backends;
 
 namespace Xwt.WPFBackend
 {
-	public class MenuButtonBackend
-		: ButtonBackend, IMenuButtonBackend
-	{
-		public MenuButtonBackend()
-			: base (new DropDownButton())
-		{
-			DropDownButton.MenuOpening += OnMenuOpening;
-		}
+    public class MenuButtonBackend
+        : ButtonBackend, IMenuButtonBackend
+    {
+        public MenuButtonBackend()
+            : base(new DropDownButton())
+        {
+            DropDownButton.MenuOpening += OnMenuOpening;
+        }
 
-		protected DropDownButton DropDownButton {
-			get { return (DropDownButton) Button; }
-		}
+        protected DropDownButton DropDownButton {
+            get { return (DropDownButton)Button; }
+        }
 
-		protected IMenuButtonEventSink MenuButtonEventSink {
-			get { return (IMenuButtonEventSink) EventSink; }
-		}
+        protected IMenuButtonEventSink MenuButtonEventSink {
+            get { return (IMenuButtonEventSink)EventSink; }
+        }
 
-		public override void SetButtonType (ButtonType type)
-		{
-			switch (type) {
-			case ButtonType.Normal:
-				DropDownButton.Style = null;
-				break;
+        public override void SetButtonType(ButtonType type)
+        {
+            switch (type)
+            {
+                case ButtonType.Normal:
+                    DropDownButton.Style = null;
+                    break;
 
-			case ButtonType.DropDown:
-				DropDownButton.Style = (Style) ButtonResources["MenuDropDown"];
-				break;
-			}
+                case ButtonType.DropDown:
+                    try
+                    {
+                        DropDownButton.Style = (Style)ButtonResources["MenuDropDown"];
+                    }
+                    catch {; }
+                    break;
+            }
 
-			DropDownButton.InvalidateMeasure();
-		}
+            DropDownButton.InvalidateMeasure();
+        }
 
-		private void OnMenuOpening (object sender, DropDownButton.MenuOpeningEventArgs e)
-		{
-			Context.InvokeUserCode (() =>
-				e.ContextMenu = ((MenuBackend) MenuButtonEventSink.OnCreateMenu ()).CreateContextMenu ());
-		}
-	}
+        private void OnMenuOpening(object sender, DropDownButton.MenuOpeningEventArgs e)
+        {
+            Context.InvokeUserCode(() =>
+               e.ContextMenu = ((MenuBackend)MenuButtonEventSink.OnCreateMenu()).CreateContextMenu());
+        }
+    }
 }

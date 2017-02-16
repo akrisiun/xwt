@@ -39,159 +39,167 @@ using System.Windows.Data;
 
 namespace Xwt.WPFBackend
 {
-	public class ButtonBackend : WidgetBackend, IButtonBackend
-	{
-		public ButtonBackend ()
-			: this (new WpfButton ())
-		{
-		}
+    public class ButtonBackend : WidgetBackend, IButtonBackend
+    {
+        public ButtonBackend()
+            : this(new WpfButton())
+        {
+        }
 
-		protected ButtonBackend (ButtonBase impl)
-		{
-			if (impl == null)
-				throw new ArgumentNullException ("impl");
+        protected ButtonBackend(ButtonBase impl)
+        {
+            if (impl == null)
+                throw new ArgumentNullException("impl");
 
-			Widget = impl;
-		}
+            Widget = impl;
+        }
 
-		protected ButtonBase Button {
-			get { return (ButtonBase)Widget; }
-		}
+        protected ButtonBase Button {
+            get { return (ButtonBase)Widget; }
+        }
 
-		protected new IButtonEventSink EventSink {
-			get { return (IButtonEventSink)base.EventSink; }
-		}
+        protected new IButtonEventSink EventSink {
+            get { return (IButtonEventSink)base.EventSink; }
+        }
 
-		public void SetButtonStyle (ButtonStyle style) {
-			switch (style)
-			{
-				case ButtonStyle.Normal:
-					Button.ClearValue (SWC.Control.BackgroundProperty);
-					Button.ClearValue (SWC.Control.BorderThicknessProperty);
-					Button.ClearValue (SWC.Control.BorderBrushProperty);
-					break;
-				case ButtonStyle.Flat:
-					Button.Background = Brushes.Transparent;
-					Button.BorderBrush = Brushes.Transparent;
-					break;
-				case ButtonStyle.Borderless:
-					Button.ClearValue (SWC.Control.BackgroundProperty);
-					Button.BorderThickness = new Thickness (0);
-					Button.BorderBrush = Brushes.Transparent;
-					break;
-			}
-			Button.InvalidateMeasure ();
-		}
+        public void SetButtonStyle(ButtonStyle style)
+        {
+            switch (style)
+            {
+                case ButtonStyle.Normal:
+                    Button.ClearValue(SWC.Control.BackgroundProperty);
+                    Button.ClearValue(SWC.Control.BorderThicknessProperty);
+                    Button.ClearValue(SWC.Control.BorderBrushProperty);
+                    break;
+                case ButtonStyle.Flat:
+                    Button.Background = Brushes.Transparent;
+                    Button.BorderBrush = Brushes.Transparent;
+                    break;
+                case ButtonStyle.Borderless:
+                    Button.ClearValue(SWC.Control.BackgroundProperty);
+                    Button.BorderThickness = new Thickness(0);
+                    Button.BorderBrush = Brushes.Transparent;
+                    break;
+            }
+            Button.InvalidateMeasure();
+        }
 
-		public virtual void SetButtonType (ButtonType type) {
-			switch (type) {
-			case ButtonType.Normal:
-				Button.Style = null;
-				break;
+        public virtual void SetButtonType(ButtonType type)
+        {
+            switch (type)
+            {
+                case ButtonType.Normal:
+                    Button.Style = null;
+                    break;
 
-			case ButtonType.DropDown:
-				Button.Style = (Style) ButtonResources ["NormalDropDown"];
-				break;
-			}
+                case ButtonType.DropDown:
+                    Button.Style = (Style)ButtonResources["NormalDropDown"];
+                    break;
+            }
 
-			Button.InvalidateMeasure ();
-		}
+            Button.InvalidateMeasure();
+        }
 
-		public void SetContent (string label, bool useMnemonic, ImageDescription image, ContentPosition position)
-		{
-			var accessText = new SWC.AccessText ();
-			accessText.Text = label;
-			if (image.IsNull)
-				if (useMnemonic)
-					Button.Content = accessText;
-				else
-					Button.Content = accessText.Text.Replace ("_", "__");
-			else {
-				SWC.DockPanel grid = new SWC.DockPanel ();
+        public void SetContent(string label, bool useMnemonic, ImageDescription image, ContentPosition position)
+        {
+            var accessText = new SWC.AccessText();
+            accessText.Text = label;
+            if (image.IsNull)
+                if (useMnemonic)
+                    Button.Content = accessText;
+                else
+                    Button.Content = accessText.Text.Replace("_", "__");
+            else
+            {
+                SWC.DockPanel grid = new SWC.DockPanel();
 
-				var imageCtrl = new ImageBox (Context);
-				imageCtrl.ImageSource = image;
+                var imageCtrl = new ImageBox(Context);
+                imageCtrl.ImageSource = image;
 
-				SWC.DockPanel.SetDock (imageCtrl, DataConverter.ToWpfDock (position));
-				grid.Children.Add (imageCtrl);
+                SWC.DockPanel.SetDock(imageCtrl, DataConverter.ToWpfDock(position));
+                grid.Children.Add(imageCtrl);
 
-				if (!string.IsNullOrEmpty (label)) {
-					SWC.Label labelCtrl = new SWC.Label ();
-					if (useMnemonic)
-						labelCtrl.Content = accessText;
-					else
-						labelCtrl.Content = label;
-					labelCtrl.SetBinding (SWC.Label.ForegroundProperty, new Binding ("Foreground") { Source = Button });
-					grid.Children.Add (labelCtrl);
-				}
-				Button.Content = grid;
-			}
-			Button.InvalidateMeasure ();
-		}
+                if (!string.IsNullOrEmpty(label))
+                {
+                    SWC.Label labelCtrl = new SWC.Label();
+                    if (useMnemonic)
+                        labelCtrl.Content = accessText;
+                    else
+                        labelCtrl.Content = label;
+                    labelCtrl.SetBinding(SWC.Label.ForegroundProperty, new Binding("Foreground") { Source = Button });
+                    grid.Children.Add(labelCtrl);
+                }
+                Button.Content = grid;
+            }
+            Button.InvalidateMeasure();
+        }
 
-		public Xwt.Drawing.Color LabelColor
-		{
-			get { return Button.Foreground.ToXwtColor(); }
-			set { Button.Foreground = ResPool.GetSolidBrush (value.ToWpfColor()); }
-		}
+        public Xwt.Drawing.Color LabelColor {
+            get { return Button.Foreground.ToXwtColor(); }
+            set { Button.Foreground = ResPool.GetSolidBrush(value.ToWpfColor()); }
+        }
 
-		public override void EnableEvent (object eventId)
-		{
-			base.EnableEvent (eventId);
-			if (eventId is ButtonEvent)
-			{
-				switch ((ButtonEvent)eventId)
-				{
-					case ButtonEvent.Clicked: Button.Click += HandleWidgetClicked; break;
-				}
-			}
-		}
+        public override void EnableEvent(object eventId)
+        {
+            base.EnableEvent(eventId);
+            if (eventId is ButtonEvent)
+            {
+                switch ((ButtonEvent)eventId)
+                {
+                    case ButtonEvent.Clicked: Button.Click += HandleWidgetClicked; break;
+                }
+            }
+        }
 
-		public override void DisableEvent (object eventId)
-		{
-			base.DisableEvent (eventId);
-			if (eventId is ButtonEvent)
-			{
-				switch ((ButtonEvent)eventId)
-				{
-					case ButtonEvent.Clicked: Button.Click -= HandleWidgetClicked; break;
-				}
-			}
-		}
+        public override void DisableEvent(object eventId)
+        {
+            base.DisableEvent(eventId);
+            if (eventId is ButtonEvent)
+            {
+                switch ((ButtonEvent)eventId)
+                {
+                    case ButtonEvent.Clicked: Button.Click -= HandleWidgetClicked; break;
+                }
+            }
+        }
 
-		void HandleWidgetClicked (object sender, EventArgs e)
-		{
-			Context.InvokeUserCode (EventSink.OnClicked);
-		}
+        void HandleWidgetClicked(object sender, EventArgs e)
+        {
+            Context.InvokeUserCode(EventSink.OnClicked);
+        }
 
-		private static ResourceDictionary buttonsDictionary;
-		protected static ResourceDictionary ButtonResources
-		{
-			get
-			{
-				if (buttonsDictionary == null) {
-					Uri uri = new Uri ("pack://application:,,,/Xwt.WPF;component/XWT.WPFBackend/Buttons.xaml");
-					buttonsDictionary = (ResourceDictionary)XamlReader.Load (System.Windows.Application.GetResourceStream (uri).Stream);
-				}
+        private static ResourceDictionary buttonsDictionary;
+        protected static ResourceDictionary ButtonResources {
+            get {
+                if (buttonsDictionary == null)
+                {
+                    try
+                    {
+                        // Xwt3
+                        Uri uri = new Uri("pack://application:,,,/Xwt.WPF;component/XWT.WPFBackend/Buttons.xaml");
+                        buttonsDictionary = (ResourceDictionary)XamlReader.Load(System.Windows.Application.GetResourceStream(uri).Stream);
+                    }
+                    catch {; }
+                }
 
-				return buttonsDictionary;
-			}
-		}
-	}
+                return buttonsDictionary;
+            }
+        }
+    }
 
-	class WpfButton : SWC.Button, IWpfWidget
-	{
-		public WidgetBackend Backend { get; set; }
+    class WpfButton : SWC.Button, IWpfWidget
+    {
+        public WidgetBackend Backend { get; set; }
 
-		protected override System.Windows.Size MeasureOverride (System.Windows.Size constraint)
-		{
-			var s = base.MeasureOverride (constraint);
-			return Backend.MeasureOverride (constraint, s);
-		}
+        protected override System.Windows.Size MeasureOverride(System.Windows.Size constraint)
+        {
+            var s = base.MeasureOverride(constraint);
+            return Backend.MeasureOverride(constraint, s);
+        }
 
-		protected override System.Windows.Size ArrangeOverride (System.Windows.Size arrangeBounds)
-		{
-			return base.ArrangeOverride (arrangeBounds);
-		}
-	}
+        protected override System.Windows.Size ArrangeOverride(System.Windows.Size arrangeBounds)
+        {
+            return base.ArrangeOverride(arrangeBounds);
+        }
+    }
 }

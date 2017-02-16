@@ -49,7 +49,10 @@ namespace Xwt
 		}
 		public static void ShowError (WindowFrame parent, string primaryText, string secondaryText)
 		{
-			GenericAlert (parent, Toolkit.CurrentEngine.Defaults.MessageDialog.ErrorIcon, primaryText, secondaryText, Command.Ok);
+            if (Toolkit.CurrentEngine == null)
+                ShowError(primaryText);
+            else 
+			    GenericAlert (parent, Toolkit.CurrentEngine.Defaults.MessageDialog.ErrorIcon, primaryText, secondaryText, Command.Ok);
 		}
 		#endregion
 		
@@ -205,7 +208,7 @@ namespace Xwt
 		
 		static Command GenericAlert (WindowFrame parent, MessageDescription message)
 		{
-			if (message.ApplyToAllButton != null)
+			if (message.ApplyToAllButton != null || Toolkit.CurrentEngine == null)
 				return message.ApplyToAllButton;
 
 			IAlertDialogBackend backend = Toolkit.CurrentEngine.Backend.CreateBackend<IAlertDialogBackend> ();

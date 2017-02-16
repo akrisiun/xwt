@@ -50,10 +50,10 @@ namespace Xwt
 
 		static KnownBackend[] knownBackends = new [] {
 			new KnownBackend { Type = ToolkitType.Gtk3, TypeName = "Xwt.GtkBackend.GtkEngine, Xwt3.Gtk3" },
-			new KnownBackend { Type = ToolkitType.Gtk, TypeName = "Xwt.GtkBackend.GtkEngine, Xwt.Gtk" },
+            new KnownBackend { Type = ToolkitType.Wpf, TypeName = "Xwt.WPFBackend.WPFEngine, Xwt.WPF" },
+            new KnownBackend { Type = ToolkitType.Gtk, TypeName = "Xwt.GtkBackend.GtkEngine, Xwt.Gtk" },
 			new KnownBackend { Type = ToolkitType.XamMac, TypeName = "Xwt.Mac.MacEngine, Xwt.XamMac" },
 			new KnownBackend { Type = ToolkitType.Cocoa, TypeName = "Xwt.Mac.MacEngine, Xwt.Mac" },
-			new KnownBackend { Type = ToolkitType.Wpf, TypeName = "Xwt.WPFBackend.WPFEngine, Xwt3.WPF" },
 		};
 
 		class KnownBackend

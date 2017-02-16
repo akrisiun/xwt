@@ -50,6 +50,12 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
+
+    <Reference Include="Xwt">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\Xwt.dll</HintPath>
+    </Reference>
+    
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -185,11 +191,5 @@
     <EmbeddedResource Include="icons\remove-16~dark.png" />
     <EmbeddedResource Include="icons\remove-16~disabled.png" />
     <EmbeddedResource Include="icons\remove-16~dark~disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Xwt\Xwt.csproj">
-      <Project>{92494904-35fa-4dc9-bde9-3a3e87ac49d3}</Project>
-      <Name>Xwt</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

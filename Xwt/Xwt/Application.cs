@@ -76,9 +76,14 @@ namespace Xwt
 		/// Initialize Xwt with the specified type.
 		/// </summary>
 		/// <param name="type">The toolkit type.</param>
-		public static void Initialize (ToolkitType type)
-		{
-			Initialize (Toolkit.GetBackendType (type));
+		public static void Initialize (ToolkitType type, string TypeName = null)
+        {
+            if (type == ToolkitType.Wpf)
+                TypeName = "Xwt.WPFBackend.WPFEngine, Xwt.WPF";
+            else
+                TypeName = Toolkit.GetBackendType(type);
+
+            Initialize (TypeName);
 			toolkit.Type = type;
 		}
 
