@@ -28,7 +28,7 @@ using NUnit.Framework;
 
 namespace Xwt
 {
-	[Ignore]
+	[Ignore("combo ignore")]
 	public class ComboBoxEntryTests: WidgetTests
 	{
 		public override Widget CreateWidget ()

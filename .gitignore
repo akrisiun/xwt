@@ -21,3 +21,4 @@ generated-stamp
 
 lib/*.exe
 packages/
+lib/*.exe

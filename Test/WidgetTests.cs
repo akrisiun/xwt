@@ -33,12 +33,12 @@ namespace Xwt
     {
         public abstract Widget CreateWidget();
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Init()
         {
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void Cleanup()
         {
         }
@@ -194,7 +194,7 @@ namespace Xwt
         }
 
         [Test]
-        [Ignore]
+        [Ignore("minSize")]
         public void MinSize()
         {
             var win = new Window();
@@ -228,7 +228,7 @@ namespace Xwt
         }
 
         [Test]
-        [Ignore]
+        [Ignore("Coordinates")]
         public void Coordinates()
         {
             var win = new Window();

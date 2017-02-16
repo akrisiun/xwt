@@ -59,8 +59,11 @@ namespace Samples
 			
 			
 			HPaned box = new HPaned ();
-			
-			icon = Image.FromResource (typeof(App), "document-generic.png");
+
+            try
+            {
+                icon = Image.FromResource(typeof(App), "document-generic.png");
+            } catch {; } // this is not reason to stop
 			
 			store = new TreeStore (nameCol, iconCol, widgetCol);
 			samplesTree = new TreeView ();
