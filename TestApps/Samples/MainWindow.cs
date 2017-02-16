@@ -67,7 +67,8 @@ namespace Samples
 			samplesTree.Columns.Add ("Name", iconCol, nameCol);
 
 			var w = AddSample (null, "Widgets", null);
-			AddSample (w, "Boxes", typeof(Boxes));
+#if UNIX
+            AddSample (w, "Boxes", typeof(Boxes));
 			AddSample (w, "Buttons", typeof(ButtonSample));
 			AddSample (w, "Calendar", typeof(CalendarSample));
 			AddSample (w, "CheckBox", typeof(Checkboxes));
@@ -90,10 +91,12 @@ namespace Samples
 			var listView = AddSample (w, "ListView", typeof(ListView1));
 			AddSample (listView, "Editable Checkboxes", typeof(ListView2));
 			AddSample (listView, "Cell Bounds", typeof(ListViewCellBounds));
-			AddSample (listView, "Editable Entries", typeof (ListViewEntries));
+            AddSample (listView, "Editable Entries", typeof (ListViewEntries));
 			AddSample (listView, "ComboBox", typeof (ListViewCombos));
-			AddSample (w, "Markdown", typeof (MarkDownSample));
+#endif
+            AddSample(w, "Markdown", typeof (MarkDownSample));
 			AddSample (w, "Menu", typeof(MenuSamples));
+#if UNIX
 			AddSample (w, "Mnemonics", typeof (Mnemonics));
 			AddSample (w, "Notebook", typeof(NotebookSample));
 			AddSample (w, "Paneds", typeof(PanedViews));
@@ -132,15 +135,17 @@ namespace Samples
 			AddSample (wf, "Opacity", typeof(OpacitySample));
 			AddSample (wf, "Tooltips", typeof(Tooltips));
 			AddSample (wf, "Cursors", typeof(MouseCursors));
+#endif
 
 			var windows = AddSample (null, "Windows", typeof(Windows));
-			AddSample (windows, "Message Dialogs", typeof(MessageDialogs));
+#if UNIX
+            AddSample (windows, "Message Dialogs", typeof(MessageDialogs));
 			
 			AddSample (null, "Screens", typeof (ScreensSample));
 
 			AddSample (null, "Multithreading", typeof (MultithreadingSample));
-
-			samplesTree.DataSource = store;
+#endif
+            samplesTree.DataSource = store;
 			
 			box.Panel1.Content = samplesTree;
 			
