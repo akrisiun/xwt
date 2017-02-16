@@ -34,7 +34,7 @@ namespace Xwt {
 	[TypeConverter (typeof(SizeValueConverter))]
 	[ValueSerializer (typeof(SizeValueSerializer))]
 	[Serializable]
-	public struct Size
+	public struct Size : IEquatable<Size>
 	{		
 		double width, height;
 
@@ -91,6 +91,16 @@ namespace Xwt {
 		{
 			return (s1.width != s2.width) || (s1.height != s2.height);
 		}
+
+		public static Size operator * (Size size, double factor)
+		{
+			return new Size (size.width * factor, size.height * factor);
+		}
+
+		public static Size operator / (Size size, double factor)
+		{
+			return new Size (size.width / factor, size.height / factor);
+		}
 		
 		public static explicit operator Point (Size size) 
 		{
@@ -105,6 +115,11 @@ namespace Xwt {
 		public override bool Equals (object ob)
 		{
 			return (ob is Size) && this == (Size)ob;
+		}
+
+		public bool Equals(Size other)
+		{
+			return this == other;
 		}
 
 		public override int GetHashCode ()

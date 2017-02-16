@@ -64,6 +64,8 @@ namespace Xwt.Mac
 
 		public CompositeCell (ApplicationContext context, Orientation dir, ICellSource source)
 		{
+			if (source == null)
+				throw new ArgumentNullException ("source");
 			direction = dir;
 			this.context = context;
 			this.source = source;
@@ -108,6 +110,8 @@ namespace Xwt.Mac
 		void ICopiableObject.CopyFrom (object other)
 		{
 			var ob = (CompositeCell)other;
+			if (ob.source == null)
+				throw new ArgumentException ("Cannot copy from a CompositeCell with a null `source`");
 			context = ob.context;
 			source = ob.source;
 			val = ob.val;
@@ -167,8 +171,6 @@ namespace Xwt.Mac
 			}
 
 			var s = CellSize;
-			if (s.Height > source.RowHeight)
-				source.RowHeight = s.Height;
 		}
 
 		IEnumerable<ICellRenderer> VisibleCells {

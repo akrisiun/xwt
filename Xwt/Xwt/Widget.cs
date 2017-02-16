@@ -590,7 +590,10 @@ namespace Xwt
 		/// <value>The widgets name.</value>
 		/// <remarks>The name can be used to identify this widget by e.g. designers.</remarks>
 		[DefaultValue (null)]
-		public string Name { get; set; }
+		public override string Name {
+			get { return Backend.Name; }
+			set { Backend.Name = value; }
+		}
 		
 		/// <summary>
 		/// Gets the parent widget of this <see cref="Xwt.Widget"/>.
@@ -857,7 +860,7 @@ namespace Xwt
 		/// <param name='types'>Types of data that can be dropped on this widget.</param>
 		public void SetDragDropTarget (params Type[] types)
 		{
-			Backend.SetDragTarget (types.Select (t => TransferDataType.FromType (t)).ToArray (), DragDropAction.All);
+			Backend.SetDragTarget (types.Select (TransferDataType.FromType).ToArray (), DragDropAction.All);
 		}
 		
 		/// <summary>
@@ -877,7 +880,7 @@ namespace Xwt
 		/// <param name='dragAction'>Bitmask of possible actions for a drop on this widget</param>
 		public void SetDragDropTarget (DragDropAction dragAction, params Type[] types)
 		{
-			Backend.SetDragTarget (types.Select (t => TransferDataType.FromType (t)).ToArray(), dragAction);
+			Backend.SetDragTarget (types.Select (TransferDataType.FromType).ToArray(), dragAction);
 		}
 		
 		/// <summary>
@@ -895,7 +898,7 @@ namespace Xwt
 		/// <param name='types'>Types of data that can be dragged from this widget</param>
 		public void SetDragSource (params Type[] types)
 		{
-			Backend.SetDragSource (types.Select (t => TransferDataType.FromType (t)).ToArray(), DragDropAction.All);
+			Backend.SetDragSource (types.Select (TransferDataType.FromType).ToArray(), DragDropAction.All);
 		}
 		
 		/// <summary>
@@ -915,7 +918,7 @@ namespace Xwt
 		/// <param name='dragAction'>Bitmask of possible actions for a drag from this widget</param>
 		public void SetDragSource (DragDropAction dragAction, params Type[] types)
 		{
-			Backend.SetDragSource (types.Select (t => TransferDataType.FromType (t)).ToArray(), dragAction);
+			Backend.SetDragSource (types.Select (TransferDataType.FromType).ToArray(), dragAction);
 		}
 		
 		/// <summary>

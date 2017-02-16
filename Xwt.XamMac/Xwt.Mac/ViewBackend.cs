@@ -142,6 +142,8 @@ namespace Xwt.Mac
 					viewObject.Backend = this;
 			}
 		}
+
+		public string Name { get; set; }
 		
 		public bool Visible {
 			get { return !Widget.Hidden; }
@@ -416,8 +418,8 @@ namespace Xwt.Mac
 		
 		public Point ConvertToScreenCoordinates (Point widgetCoordinates)
 		{
-			var lo = Widget.ConvertPointToBase (new CGPoint ((nfloat)widgetCoordinates.X, (nfloat)widgetCoordinates.Y));
-			lo = Widget.Window.ConvertBaseToScreen (lo);
+			var lo = Widget.ConvertPointToView (new CGPoint ((nfloat)widgetCoordinates.X, (nfloat)widgetCoordinates.Y), null);
+			lo = Widget.Window.ConvertRectToScreen (new CGRect (lo, CGSize.Empty)).Location;
 			return MacDesktopBackend.ToDesktopRect (new CGRect (lo.X, lo.Y, 0, Widget.IsFlipped ? 0 : Widget.Frame.Height)).Location;
 		}
 		
@@ -577,7 +579,7 @@ namespace Xwt.Mac
 		public void SetDragTarget (TransferDataType[] types, DragDropAction dragAction)
 		{
 			SetupForDragDrop (Widget.GetType ());
-			var dtypes = types.Select (t => ToNSDragType (t)).ToArray ();
+			var dtypes = types.Select (ToNSDragType).ToArray ();
 			Widget.RegisterForDraggedTypes (dtypes);
 		}
 		
@@ -594,7 +596,7 @@ namespace Xwt.Mac
 			var backend = ob.Backend;
 			
 			NSDraggingInfo di = (NSDraggingInfo) Runtime.GetNSObject (dragInfo);
-			var types = di.DraggingPasteboard.Types.Select (t => ToXwtDragType (t)).ToArray ();
+			var types = di.DraggingPasteboard.Types.Select (ToXwtDragType).ToArray ();
 			var pos = new Point (di.DraggingLocation.X, di.DraggingLocation.Y);
 			
 			if ((backend.currentEvents & WidgetEvent.DragOverCheck) != 0) {
@@ -640,7 +642,7 @@ namespace Xwt.Mac
 			var backend = ob.Backend;
 			
 			NSDraggingInfo di = (NSDraggingInfo) Runtime.GetNSObject (dragInfo);
-			var types = di.DraggingPasteboard.Types.Select (t => ToXwtDragType (t)).ToArray ();
+			var types = di.DraggingPasteboard.Types.Select (ToXwtDragType).ToArray ();
 			var pos = new Point (di.DraggingLocation.X, di.DraggingLocation.Y);
 			
 			if ((backend.currentEvents & WidgetEvent.DragDropCheck) != 0) {
