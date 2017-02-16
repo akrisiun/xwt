@@ -35,7 +35,7 @@ using CoreGtk3 = Gtk.CoreGtk3;
 
 namespace Xwt.GtkBackend
 {
-    public class GtkEngine : ToolkitEngineBackend
+    public class GtkEngine : ToolkitEngineBackend, IEngineBackend
     {
         static GtkEngine()
         {
@@ -49,6 +49,14 @@ namespace Xwt.GtkBackend
             CoreGtk3.LoadDlls();
             Gtk.Application.Init();
         }
+
+        //object GetNativeWidget(Widget w)
+        public override object GetNativeWindow(IWindowFrameBackend backend)
+        { 
+            return null;
+        }
+
+        //public override IWindowFrameBackend GetBackendForWindow(object nativeWindow)
 
         public override void InitializeBackends()
         {

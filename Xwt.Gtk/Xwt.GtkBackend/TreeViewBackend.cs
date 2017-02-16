@@ -35,7 +35,9 @@ namespace Xwt.GtkBackend
 		Gtk.TreePath autoExpandPath;
 		uint expandTimer;
 
-		protected new ITreeViewEventSink EventSink {
+        public string Name { get; set; }
+
+        protected new ITreeViewEventSink EventSink {
 			get { return (ITreeViewEventSink)base.EventSink; }
 		}
 		

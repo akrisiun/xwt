@@ -36,8 +36,10 @@ namespace Xwt.GtkBackend
 		protected new IListViewEventSink EventSink {
 			get { return (IListViewEventSink)base.EventSink; }
 		}
-		
-		public override void EnableEvent (object eventId)
+
+        public virtual void StartEditingCell(int row, CellView cell) {  }
+
+        public override void EnableEvent (object eventId)
 		{
 			base.EnableEvent (eventId);
 			if (eventId is ListViewEvent) {

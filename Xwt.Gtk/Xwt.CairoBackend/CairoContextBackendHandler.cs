@@ -93,9 +93,11 @@ namespace Xwt.CairoBackend
 			}
 		}
 
-		#region IContextBackendHandler implementation
+        public override void SetStyles(object backend, StyleSet styles) { }
 
-		public override double GetScaleFactor (object backend)
+        #region IContextBackendHandler implementation
+
+        public override double GetScaleFactor (object backend)
 		{
 			CairoContextBackend gc = (CairoContextBackend)backend;
 			return gc.ScaleFactor;

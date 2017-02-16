@@ -32,11 +32,13 @@ using Xwt.Backends;
 
 namespace Xwt.GtkBackend
 {
-	class LinkLabelBackend : LabelBackend, ILinkLabelBackend
-	{
+	class LinkLabelBackend : LabelBackend, ILinkLabelBackend, ILabelBackend
+    {
 		Uri uri;
 
-		bool ClickEnabled {
+        public bool Selectable { get; set; }
+
+        bool ClickEnabled {
 			get; set;
 		}
 

@@ -31,12 +31,16 @@ using System.Linq;
 
 namespace Xwt.GtkBackend
 {
-	public class DialogBackend: WindowBackend, IDialogBackend
-	{
+	public class DialogBackend: WindowBackend, IDialogBackend, IWindowFrameBackend
+    {
 		DialogButton[] dialogButtons;
 		Gtk.Button[] buttons;
-		
-		public DialogBackend ()
+
+        object IWindowFrameBackend.Window { get { return base.Window; } }
+
+        public DialogButton DefaultButton { get; set; }
+
+        public DialogBackend ()
 		{
 		}
 		

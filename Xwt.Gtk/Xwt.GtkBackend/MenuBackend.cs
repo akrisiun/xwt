@@ -34,8 +34,10 @@ namespace Xwt.GtkBackend
 	public class MenuBackend: IMenuBackend
 	{
 		Gtk.MenuShell menu;
-		
-		public void InitializeBackend (object frontend, ApplicationContext context)
+
+        public object Font { get; set; }
+
+        public void InitializeBackend (object frontend, ApplicationContext context)
 		{
 			menu = new Gtk.Menu ();
 			menu.Visible = true;
@@ -45,6 +47,7 @@ namespace Xwt.GtkBackend
 			get {
 				if (menu is Gtk.Menu)
 					return (Gtk.Menu) menu;
+
 				Gtk.Menu newMenu = new Gtk.Menu ();
 				TransferProps (menu, newMenu);
 				foreach (var it in menu.Children) {

@@ -33,8 +33,13 @@ namespace Xwt.GtkBackend
 	public class WebViewBackend : WidgetBackend, IWebViewBackend
 	{
 		WebKit.WebView view;
+        public string Name { get; set; }
+        public bool ContextMenuEnabled { get; set; }
+        public bool DrawsBackground { get; set; }
+        public bool ScrollBarsEnabled { get; set; }
+        public string CustomCss { get; set; }
 
-		public WebViewBackend ()
+        public WebViewBackend ()
 		{
 		}
 

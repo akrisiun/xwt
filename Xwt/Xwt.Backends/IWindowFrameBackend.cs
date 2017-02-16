@@ -28,15 +28,22 @@ using Xwt.Drawing;
 
 namespace Xwt.Backends
 {
-	public interface IWindowFrameBackend: IBackend
+    public interface IWindowFrameBackend<T> : IWindowFrameBackend where T : class
+    {
+        T WindowType { get; set; }
+    }
+
+    public interface IWindowFrameBackend : IBackend
 	{
 		void Initialize (IWindowFrameEventSink eventSink);
 		void Dispose ();
 
-		/// <summary>
-		/// Gets or sets the name of the window.
-		/// </summary>
-		string Name { get; set; }
+        #region Properties, Methods 1
+
+        /// <summary>
+        /// Gets or sets the name of the window.
+        /// </summary>
+        string Name { get; set; }
 
 		/// <summary>
 		/// Size and position of the window content in screen coordinates
@@ -86,11 +93,13 @@ namespace Xwt.Backends
 		/// </remarks>
 		bool Close ();
 
-		/// <summary>
-		/// Gets or sets a value indicating whether this window is in full screen mode
-		/// </summary>
-		/// <value><c>true</c> if the window is in full screen mode; otherwise, <c>false</c>.</value>
-		bool FullScreen { get; set; }
+        #endregion
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this window is in full screen mode
+        /// </summary>
+        /// <value><c>true</c> if the window is in full screen mode; otherwise, <c>false</c>.</value>
+        bool FullScreen { get; set; }
 
 		/// <summary>
 		/// Gets the screen on which most of the area of this window is placed

@@ -30,112 +30,127 @@ using Xwt.Backends;
 
 namespace Xwt.GtkBackend
 {
-	public class WindowBackend: WindowFrameBackend, IWindowBackend, IConstraintProvider
-	{
-		Gtk.Alignment alignment;
-		Gtk.MenuBar mainMenu;
-		Gtk.VBox mainBox;
-		
-		public override void Initialize ()
-		{
-			Window = new Gtk.Window ("");
-			Window.Add (CreateMainLayout ());
-		}
-		
-		protected virtual Gtk.Widget CreateMainLayout ()
-		{
-			mainBox = new Gtk.VBox ();
-			mainBox.Show ();
-			alignment = new RootWindowAlignment (this);
-			mainBox.PackStart (alignment, true, true, 0);
-			alignment.Show ();
-			return mainBox;
-		}
-		
-		public Gtk.VBox MainBox {
-			get { return mainBox; }
-		}
+    public class WindowBackend : WindowFrameBackend, IWindowBackend, IWindowFrameBackend<Gtk.Window>, IConstraintProvider
+    {
+        
 
-		public override void GetMetrics (out Size minSize, out Size decorationSize)
-		{
-			if (mainMenu != null) {
-				var ms = mainMenu.SizeRequest ();
-				minSize = new Size (ms.Width, 0);
-				decorationSize = new Size (0, ms.Height);
-			}
-			else {
-				minSize = decorationSize = Size.Zero;
-			}
-		}
+        Gtk.Alignment alignment;
+        Gtk.MenuBar mainMenu;
+        Gtk.VBox mainBox;
 
-		public void SetChild (IWidgetBackend child)
-		{
-			if (alignment.Child != null) {
-				WidgetBackend.RemoveChildPlacement (alignment.Child);
-				alignment.Remove (alignment.Child);
-			}
-			alignment.Child = WidgetBackend.GetWidgetWithPlacement (child);
-		}
-		
-		public virtual void UpdateChildPlacement (IWidgetBackend childBackend)
-		{
-			WidgetBackend.SetChildPlacement (childBackend);
-		}
+        // public string Name { get; set; }
+        public IntPtr NativeHandle { get; protected set; }
 
-		public void SetMainMenu (IMenuBackend menu)
-		{
-			if (mainMenu != null)
-				mainBox.Remove (mainMenu);
-			
-			if (menu != null) {
-				MenuBackend m = (MenuBackend) menu;
-				mainMenu = m.MenuBar;
-				mainBox.PackStart (mainMenu, false, false, 0);
-				((Gtk.Box.BoxChild)mainBox[mainMenu]).Position = 0;
-			} else
-				mainMenu = null;
-		}
+        object IWindowFrameBackend.Window { get { return base.Window; } }
+        public Gtk.Window WindowType { get { return Window as Gtk.Window; } set { base.Window = value as Gtk.Window; } } 
 
-		public void SetPadding (double left, double top, double right, double bottom)
-		{
-			alignment.LeftPadding = (uint) left;
-			alignment.RightPadding = (uint) right;
-			alignment.TopPadding = (uint) top;
-			alignment.BottomPadding = (uint) bottom;
-		}
+        public override void Initialize()
+        {
+            Window = new Gtk.Window("");
+            Window.Add(CreateMainLayout());
 
-		public void SetMinSize (Size s)
-		{
-			// Not required
-		}
+            this.WindowType = Window;
+        }
 
-		public override void SetSize (double width, double height)
-		{
-			base.SetSize (width, height);
-			if (alignment.Child != null)
-				alignment.Child.QueueResize ();
-		}
-		
-		public void GetConstraints (Gtk.Widget target, out SizeConstraint width, out SizeConstraint height)
-		{
-			width = RequestedSize.Width;
-			height = RequestedSize.Height;
-		}
-	}
+        protected virtual Gtk.Widget CreateMainLayout()
+        {
+            mainBox = new Gtk.VBox();
+            mainBox.Show();
+            alignment = new RootWindowAlignment(this);
+            mainBox.PackStart(alignment, true, true, 0);
+            alignment.Show();
+            return mainBox;
+        }
 
-	class RootWindowAlignment: Gtk.Alignment, IConstraintProvider
-	{
-		WindowBackend backend;
+        public Gtk.VBox MainBox {
+            get { return mainBox; }
+        }
 
-		public RootWindowAlignment (WindowBackend backend): base (0, 0, 1, 1)
-		{
-			this.backend = backend;
-		}
+        public override void GetMetrics(out Size minSize, out Size decorationSize)
+        {
+            if (mainMenu != null)
+            {
+                var ms = mainMenu.SizeRequest();
+                minSize = new Size(ms.Width, 0);
+                decorationSize = new Size(0, ms.Height);
+            }
+            else
+            {
+                minSize = decorationSize = Size.Zero;
+            }
+        }
 
-		public void GetConstraints (Gtk.Widget target, out SizeConstraint width, out SizeConstraint height)
-		{
-			backend.GetConstraints (this, out width, out height);
-		}
-	}
+        public void SetChild(IWidgetBackend child)
+        {
+            if (alignment.Child != null)
+            {
+                WidgetBackend.RemoveChildPlacement(alignment.Child);
+                alignment.Remove(alignment.Child);
+            }
+            alignment.Child = WidgetBackend.GetWidgetWithPlacement(child);
+        }
+
+        public virtual void UpdateChildPlacement(IWidgetBackend childBackend)
+        {
+            WidgetBackend.SetChildPlacement(childBackend);
+        }
+
+        public void SetMainMenu(IMenuBackend menu)
+        {
+            if (mainMenu != null)
+                mainBox.Remove(mainMenu);
+
+            if (menu != null)
+            {
+                MenuBackend m = (MenuBackend)menu;
+                mainMenu = m.MenuBar;
+                mainBox.PackStart(mainMenu, false, false, 0);
+                ((Gtk.Box.BoxChild)mainBox[mainMenu]).Position = 0;
+            }
+            else
+                mainMenu = null;
+        }
+
+        public void SetPadding(double left, double top, double right, double bottom)
+        {
+            alignment.LeftPadding = (uint)left;
+            alignment.RightPadding = (uint)right;
+            alignment.TopPadding = (uint)top;
+            alignment.BottomPadding = (uint)bottom;
+        }
+
+        public void SetMinSize(Size s)
+        {
+            // Not required
+        }
+
+        public override void SetSize(double width, double height)
+        {
+            base.SetSize(width, height);
+            if (alignment.Child != null)
+                alignment.Child.QueueResize();
+        }
+
+        public void GetConstraints(Gtk.Widget target, out SizeConstraint width, out SizeConstraint height)
+        {
+            width = RequestedSize.Width;
+            height = RequestedSize.Height;
+        }
+    }
+
+    class RootWindowAlignment : Gtk.Alignment, IConstraintProvider
+    {
+        WindowBackend backend;
+
+        public RootWindowAlignment(WindowBackend backend) : base(0, 0, 1, 1)
+        {
+            this.backend = backend;
+        }
+
+        public void GetConstraints(Gtk.Widget target, out SizeConstraint width, out SizeConstraint height)
+        {
+            backend.GetConstraints(this, out width, out height);
+        }
+    }
 }
 

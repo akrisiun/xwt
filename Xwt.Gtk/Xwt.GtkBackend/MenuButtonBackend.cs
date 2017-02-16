@@ -27,14 +27,17 @@
 
 using System;
 using Xwt.Backends;
+using Xwt.Drawing;
 
 namespace Xwt.GtkBackend
 {
-	public class MenuButtonBackend: ButtonBackend, IMenuButtonBackend
-	{
+	public class MenuButtonBackend: ButtonBackend, IMenuButtonBackend, IButtonBackend
+    {
 		bool isOpen;
-		
-		public MenuButtonBackend ()
+
+        public Color LabelColor { get; set; }
+
+        public MenuButtonBackend ()
 		{
 		}
 

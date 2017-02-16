@@ -57,7 +57,9 @@ namespace Xwt.GtkBackend
 {
 	public class ToggleButtonBackend: ButtonBackend, IToggleButtonBackend
 	{
-		public ToggleButtonBackend ()
+        public string Name { get; set; }
+
+        public ToggleButtonBackend ()
 		{
 		}
 		

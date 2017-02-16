@@ -34,7 +34,14 @@ using System.Collections.Generic;
 
 namespace Xwt.Backends
 {
-	public abstract class ToolkitEngineBackend
+    public interface IEngineBackend
+    {
+        object GetNativeWidget(Widget w);
+        IWindowFrameBackend GetBackendForWindow(object nativeWindow);
+        object GetNativeWindow(IWindowFrameBackend backend);
+    }
+
+    public abstract class ToolkitEngineBackend
 	{
 		Dictionary<Type,Type> backendTypes;
 		Dictionary<Type,Type> backendTypesByFrontend;

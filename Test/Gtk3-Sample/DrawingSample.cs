@@ -88,7 +88,7 @@ class PrettyGraphic : DrawingArea {
 }
 
 class MovingText : DrawingArea {
-	static int d = 0;
+	//static int d = 0;
 	//Font f;
 	
 	public MovingText ()

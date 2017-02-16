@@ -31,7 +31,9 @@ namespace Xwt.GtkBackend
 {
 	public partial class WidgetBackend
 	{
-		protected Gtk.IEditable EditableWidget 
+        public string Name { get; set; }
+
+        protected Gtk.IEditable EditableWidget 
 		{
 			get { return Widget as Gtk.IEditable; }
 		}

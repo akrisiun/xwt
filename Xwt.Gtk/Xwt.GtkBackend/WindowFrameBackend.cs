@@ -25,66 +25,74 @@
 // THE SOFTWARE.
 using System;
 using Xwt.Backends;
-
-using Xwt.Drawing;
 using System.Linq;
+using System.Diagnostics;
 
 namespace Xwt.GtkBackend
 {
-	public class WindowFrameBackend: IWindowFrameBackend
-	{
-		Gtk.Window window;
-		IWindowFrameEventSink eventSink;
-		WindowFrame frontend;
-		Size requestedSize;
+    public class WindowFrameBackend : IWindowFrameBackend<Gtk.Window>
+    {
+        Gtk.Window window;
+        IWindowFrameEventSink eventSink;
+        WindowFrame frontend;
+        Size requestedSize;
 
-		public WindowFrameBackend ()
-		{
-		}
-		
-		public Gtk.Window Window {
-			get { return window; }
-			set {
-				if (window != null)
-					window.Realized -= HandleRealized;
-				window = value;
-				window.Realized += HandleRealized;
-			}
-		}
+        public string Name { get; set; }
 
-		void HandleRealized (object sender, EventArgs e)
-		{
-			if (opacity != 1d)
-				window.Window.Opacity = opacity;
-		}
-		
-		protected WindowFrame Frontend {
-			get { return frontend; }
-		}
-		
-		public ApplicationContext ApplicationContext {
-			get;
-			private set;
-		}
+        public IntPtr NativeHandle { get { return Window.Handle; } }
+        object IWindowFrameBackend.Window {
+            get { return Window; }
+        }
+        public Gtk.Window WindowType { get { return Window; } set { Window = value; } }
 
-		void IBackend.InitializeBackend (object frontend, ApplicationContext context)
-		{
-			this.frontend = (WindowFrame) frontend;
-			ApplicationContext = context;
-		}
+        public WindowFrameBackend()
+        {
+        }
 
-		public virtual void ReplaceChild (Gtk.Widget oldWidget, Gtk.Widget newWidget)
-		{
-			throw new NotSupportedException ();
-		}
-		
-		#region IWindowFrameBackend implementation
-		void IWindowFrameBackend.Initialize (IWindowFrameEventSink eventSink)
-		{
-			this.eventSink = eventSink;
-			Initialize ();
+        public Gtk.Window Window {
+            [DebuggerStepThrough]
+            get { return window; }
+            set {
+                if (window != null)
+                    window.Realized -= HandleRealized;
+                window = value;
+                window.Realized += HandleRealized;
+            }
+        }
 
-			#if !XWT_GTK3
+        void HandleRealized(object sender, EventArgs e)
+        {
+            if (opacity != 1d)
+                window.Window.Opacity = opacity;
+        }
+
+        protected WindowFrame Frontend {
+            get { return frontend; }
+        }
+
+        public ApplicationContext ApplicationContext {
+            get;
+            private set;
+        }
+
+        void IBackend.InitializeBackend(object frontend, ApplicationContext context)
+        {
+            this.frontend = (WindowFrame)frontend;
+            ApplicationContext = context;
+        }
+
+        public virtual void ReplaceChild(Gtk.Widget oldWidget, Gtk.Widget newWidget)
+        {
+            throw new NotSupportedException();
+        }
+
+        #region IWindowFrameBackend implementation
+        void IWindowFrameBackend.Initialize(IWindowFrameEventSink eventSink)
+        {
+            this.eventSink = eventSink;
+            Initialize();
+
+#if !XWT_GTK3
 			Window.SizeRequested += delegate(object o, Gtk.SizeRequestedArgs args) {
 				if (!Window.Resizable) {
 					int w = args.Requisition.Width, h = args.Requisition.Height;
@@ -95,252 +103,267 @@ namespace Xwt.GtkBackend
 					args.Requisition = new Gtk.Requisition () { Width = w, Height = h };
 				}
 			};
-			#endif
-		}
-		
-		public virtual void Initialize ()
-		{
-		}
-		
-		public virtual void Dispose ()
-		{
-			Window.Destroy ();
-		}
-		
-		public IWindowFrameEventSink EventSink {
-			get { return eventSink; }
-		}
+#endif
+        }
 
-		public void Move (double x, double y)
-		{
-			Window.Move ((int)x, (int)y);
-			ApplicationContext.InvokeUserCode (delegate {
-				EventSink.OnBoundsChanged (Bounds);
-			});
-		}
+        public virtual void Initialize()
+        {
+        }
 
-		public virtual void SetSize (double width, double height)
-		{
-			Window.SetDefaultSize ((int)width, (int)height);
-			if (width == -1)
-				width = Bounds.Width;
-			if (height == -1)
-				height = Bounds.Height;
-			requestedSize = new Size (width, height);
-			Window.Resize ((int)width, (int)height);
-		}
+        public virtual void Dispose()
+        {
+            Window.Destroy();
+        }
 
-		public Rectangle Bounds {
-			get {
-				int w, h, x, y;
-				if (Window.Window != null) {
-					Window.Window.GetOrigin (out x, out y);
-					Window.Window.GetSize (out w, out h);
-				} else {
-					Window.GetPosition (out x, out y);
-					Window.GetSize (out w, out h);
-				}
-				return new Rectangle (x, y, w, h);
-			}
-			set {
-				requestedSize = value.Size;
-				Window.Move ((int)value.X, (int)value.Y);
-				Window.Resize ((int)value.Width, (int)value.Height);
-				Window.SetDefaultSize ((int)value.Width, (int)value.Height);
-				ApplicationContext.InvokeUserCode (delegate {
-					EventSink.OnBoundsChanged (Bounds);
-				});
-			}
-		}
+        public IWindowFrameEventSink EventSink {
+            get { return eventSink; }
+        }
 
-		public Size RequestedSize {
-			get { return requestedSize; }
-		}
+        public void Move(double x, double y)
+        {
+            Window.Move((int)x, (int)y);
+            ApplicationContext.InvokeUserCode(delegate
+            {
+                EventSink.OnBoundsChanged(Bounds);
+            });
+        }
 
-		bool IWindowFrameBackend.Visible {
-			get {
-				return window.Visible;
-			}
-			set {
-				window.Visible = value;
-			}
-		}
+        public virtual void SetSize(double width, double height)
+        {
+            Window.SetDefaultSize((int)width, (int)height);
+            if (width == -1)
+                width = Bounds.Width;
+            if (height == -1)
+                height = Bounds.Height;
+            requestedSize = new Size(width, height);
+            Window.Resize((int)width, (int)height);
+        }
 
-		bool IWindowFrameBackend.Sensitive {
-			get {
-				return window.Sensitive;
-			}
-			set {
-				window.Sensitive = value;
-			}
-		}
+        public Rectangle Bounds {
+            get {
+                int w, h, x, y;
+                if (Window.Window != null)
+                {
+                    Window.Window.GetOrigin(out x, out y);
+                    Window.Window.GetSize(out w, out h);
+                }
+                else
+                {
+                    Window.GetPosition(out x, out y);
+                    Window.GetSize(out w, out h);
+                }
+                return new Rectangle(x, y, w, h);
+            }
+            set {
+                requestedSize = value.Size;
+                Window.Move((int)value.X, (int)value.Y);
+                Window.Resize((int)value.Width, (int)value.Height);
+                Window.SetDefaultSize((int)value.Width, (int)value.Height);
+                ApplicationContext.InvokeUserCode(delegate
+                {
+                    EventSink.OnBoundsChanged(Bounds);
+                });
+            }
+        }
 
-		double opacity = 1d;
-		double IWindowFrameBackend.Opacity {
-			get {
-				return opacity;
-			}
-			set {
-				opacity = value;
-				if (Window.Window != null)
-					Window.Window.Opacity = value;
-			}
-		}
+        public Size RequestedSize {
+            get { return requestedSize; }
+        }
 
-		string IWindowFrameBackend.Title {
-			get { return Window.Title; }
-			set { Window.Title = value; }
-		}
+        bool IWindowFrameBackend.Visible {
+            get {
+                return window.Visible;
+            }
+            set {
+                window.Visible = value;
+            }
+        }
 
-		bool IWindowFrameBackend.Decorated {
-			get {
-				return Window.Decorated;
-			}
-			set {
-				Window.Decorated = value;
-			}
-		}
+        bool IWindowFrameBackend.Sensitive {
+            get {
+                return window.Sensitive;
+            }
+            set {
+                window.Sensitive = value;
+            }
+        }
 
-		bool IWindowFrameBackend.ShowInTaskbar {
-			get {
-				return !Window.SkipTaskbarHint;
-			}
-			set {
-				Window.SkipTaskbarHint = !value;
-			}
-		}
+        double opacity = 1d;
+        double IWindowFrameBackend.Opacity {
+            get {
+                return opacity;
+            }
+            set {
+                opacity = value;
+                if (Window.Window != null)
+                    Window.Window.Opacity = value;
+            }
+        }
 
-		void IWindowFrameBackend.SetTransientFor (IWindowFrameBackend window)
-		{
-			Window.TransientFor = ((WindowFrameBackend)window).Window;
-		}
+        string IWindowFrameBackend.Title {
+            get { return Window.Title; }
+            set { Window.Title = value; }
+        }
 
-		public bool Resizable {
-			get {
-				return Window.Resizable;
-			}
-			set {
-				Window.Resizable = value;
-			}
-		}
+        bool IWindowFrameBackend.Decorated {
+            get {
+                return Window.Decorated;
+            }
+            set {
+                Window.Decorated = value;
+            }
+        }
 
-		bool fullScreen;
-		bool IWindowFrameBackend.FullScreen {
-			get {
-				return fullScreen;
-			}
-			set {
-				if (value != fullScreen) {
-					fullScreen = value;
-					if (fullScreen)
-						Window.Fullscreen ();
-					else
-						Window.Unfullscreen ();
-				}
-			}
-		}
+        bool IWindowFrameBackend.ShowInTaskbar {
+            get {
+                return !Window.SkipTaskbarHint;
+            }
+            set {
+                Window.SkipTaskbarHint = !value;
+            }
+        }
 
-		object IWindowFrameBackend.Screen {
-			get {
-				return Window.Screen.GetMonitorAtWindow (Window.Window);
-			}
-		}
+        void IWindowFrameBackend.SetTransientFor(IWindowFrameBackend window)
+        {
+            Window.TransientFor = ((WindowFrameBackend)window).Window;
+        }
 
-		public void SetIcon(ImageDescription icon)
-		{
-			Window.IconList = ((GtkImage)icon.Backend).Frames.Select (f => f.Pixbuf).ToArray ();
-		}
-		#endregion
+        public bool Resizable {
+            get {
+                return Window.Resizable;
+            }
+            set {
+                Window.Resizable = value;
+            }
+        }
 
-		public virtual void EnableEvent (object ev)
-		{
-			if (ev is WindowFrameEvent) {
-				switch ((WindowFrameEvent)ev) {
-				case WindowFrameEvent.BoundsChanged:
-					Window.AddEvents ((int)Gdk.EventMask.StructureMask);
-					Window.ConfigureEvent += HandleConfigureEvent; break;
-				case WindowFrameEvent.Closed:
-				case WindowFrameEvent.CloseRequested:
-					Window.DeleteEvent += HandleCloseRequested; break;
-				case WindowFrameEvent.Shown:
-					Window.Shown += HandleShown; break;
-				case WindowFrameEvent.Hidden:
-					Window.Hidden += HandleHidden; break;
-				}
-			}
-		}
+        bool fullScreen;
+        bool IWindowFrameBackend.FullScreen {
+            get {
+                return fullScreen;
+            }
+            set {
+                if (value != fullScreen)
+                {
+                    fullScreen = value;
+                    if (fullScreen)
+                        Window.Fullscreen();
+                    else
+                        Window.Unfullscreen();
+                }
+            }
+        }
 
-		public virtual void DisableEvent (object ev)
-		{
-			if (ev is WindowFrameEvent) {
-				switch ((WindowFrameEvent)ev) {
-				case WindowFrameEvent.BoundsChanged:
-					Window.ConfigureEvent -= HandleConfigureEvent; break;
-				case WindowFrameEvent.Shown:
-					Window.Shown -= HandleShown; break;
-				case WindowFrameEvent.Hidden:
-					Window.Hidden -= HandleHidden; break;
-				}
-			}
-		}
-		
-		void HandleHidden (object sender, EventArgs e)
-		{
-			ApplicationContext.InvokeUserCode (delegate {
-				EventSink.OnHidden ();
-			});
-		}
+        object IWindowFrameBackend.Screen {
+            get {
+                return Window.Screen.GetMonitorAtWindow(Window.Window);
+            }
+        }
 
-		void HandleShown (object sender, EventArgs e)
-		{
-			ApplicationContext.InvokeUserCode (delegate {
-				EventSink.OnShown ();
-			});
-		}
+        public void SetIcon(ImageDescription icon)
+        {
+            Window.IconList = ((GtkImage)icon.Backend).Frames.Select(f => f.Pixbuf).ToArray();
+        }
+        #endregion
 
-		[GLib.ConnectBefore]
-		void HandleConfigureEvent (object o, Gtk.ConfigureEventArgs args)
-		{
-			ApplicationContext.InvokeUserCode (delegate {
-				EventSink.OnBoundsChanged (Bounds);
-			});
-		}
+        public virtual void EnableEvent(object ev)
+        {
+            if (ev is WindowFrameEvent)
+            {
+                switch ((WindowFrameEvent)ev)
+                {
+                    case WindowFrameEvent.BoundsChanged:
+                        Window.AddEvents((int)Gdk.EventMask.StructureMask);
+                        Window.ConfigureEvent += HandleConfigureEvent; break;
+                    case WindowFrameEvent.Closed:
+                    case WindowFrameEvent.CloseRequested:
+                        Window.DeleteEvent += HandleCloseRequested; break;
+                    case WindowFrameEvent.Shown:
+                        Window.Shown += HandleShown; break;
+                    case WindowFrameEvent.Hidden:
+                        Window.Hidden += HandleHidden; break;
+                }
+            }
+        }
 
-		void HandleCloseRequested (object o, Gtk.DeleteEventArgs args)
-		{
-			args.RetVal = !PerformClose (true);
-		}
+        public virtual void DisableEvent(object ev)
+        {
+            if (ev is WindowFrameEvent)
+            {
+                switch ((WindowFrameEvent)ev)
+                {
+                    case WindowFrameEvent.BoundsChanged:
+                        Window.ConfigureEvent -= HandleConfigureEvent; break;
+                    case WindowFrameEvent.Shown:
+                        Window.Shown -= HandleShown; break;
+                    case WindowFrameEvent.Hidden:
+                        Window.Hidden -= HandleHidden; break;
+                }
+            }
+        }
 
-		internal bool PerformClose (bool userClose)
-		{
-			bool close = false;
-			ApplicationContext.InvokeUserCode(delegate {
-				close = EventSink.OnCloseRequested ();
-			});
-			if (close) {
-				if (!userClose)
-					Window.Hide ();
-				ApplicationContext.InvokeUserCode(EventSink.OnClosed);
-			}
-			return close;
-		}
+        void HandleHidden(object sender, EventArgs e)
+        {
+            ApplicationContext.InvokeUserCode(delegate
+            {
+                EventSink.OnHidden();
+            });
+        }
 
-		public void Present ()
-		{
-			if (Platform.IsMac)
-				GtkWorkarounds.GrabDesktopFocus ();
-			Window.Present ();
-		}
+        void HandleShown(object sender, EventArgs e)
+        {
+            ApplicationContext.InvokeUserCode(delegate
+            {
+                EventSink.OnShown();
+            });
+        }
 
-		public virtual bool Close ()
-		{
-			return PerformClose (false);
-		}
+        [GLib.ConnectBefore]
+        void HandleConfigureEvent(object o, Gtk.ConfigureEventArgs args)
+        {
+            ApplicationContext.InvokeUserCode(delegate
+            {
+                EventSink.OnBoundsChanged(Bounds);
+            });
+        }
 
-		public virtual void GetMetrics (out Size minSize, out Size decorationSize)
-		{
-			minSize = decorationSize = Size.Zero;
-		}
-	}
+        void HandleCloseRequested(object o, Gtk.DeleteEventArgs args)
+        {
+            args.RetVal = !PerformClose(true);
+        }
+
+        internal bool PerformClose(bool userClose)
+        {
+            bool close = false;
+            ApplicationContext.InvokeUserCode(delegate
+            {
+                close = EventSink.OnCloseRequested();
+            });
+            if (close)
+            {
+                if (!userClose)
+                    Window.Hide();
+                ApplicationContext.InvokeUserCode(EventSink.OnClosed);
+            }
+            return close;
+        }
+
+        public void Present()
+        {
+            if (Platform.IsMac)
+                GtkWorkarounds.GrabDesktopFocus();
+            Window.Present();
+        }
+
+        public virtual bool Close()
+        {
+            return PerformClose(false);
+        }
+
+        public virtual void GetMetrics(out Size minSize, out Size decorationSize)
+        {
+            minSize = decorationSize = Size.Zero;
+        }
+    }
 }
 

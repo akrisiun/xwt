@@ -30,8 +30,8 @@ using Xwt.CairoBackend;
 
 namespace Xwt.GtkBackend
 {
-	public class SearchTextEntryBackend: TextEntryBackend, ISearchTextEntryBackend
-	{
+	public class SearchTextEntryBackend: TextEntryBackend, ISearchTextEntryBackend, ITextEntryBackend
+    {
 		public override void Initialize ()
 		{
 			base.Initialize ();
@@ -42,7 +42,11 @@ namespace Xwt.GtkBackend
 			TextEntry.IconRelease += ResetSearch;
 		}
 
-		void ResetSearch (object o, Gtk.IconReleaseArgs args)
+        public bool HasCompletions { get; protected set; }
+        //void SetCompletions(string[] completions);
+        //void SetCompletionMatchFunc(Func<string, string, bool> matchFunc);
+
+        void ResetSearch (object o, Gtk.IconReleaseArgs args)
 		{
 			if (args.P0 == Gtk.EntryIconPosition.Secondary)
 				Text = String.Empty;

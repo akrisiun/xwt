@@ -38,8 +38,10 @@ namespace Xwt.GtkBackend
 	public class GtkTextLayoutBackendHandler: TextLayoutBackendHandler
 	{
 		static Cairo.Context SharedContext;
-		
-		public double Heigth = -1;
+
+        public override double GetMeanline(object backend) { return 0.0; }
+
+        public double Heigth = -1;
 
 		internal class PangoBackend : IDisposable
 		{

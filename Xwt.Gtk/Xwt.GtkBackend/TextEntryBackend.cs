@@ -32,7 +32,9 @@ namespace Xwt.GtkBackend
 {
 	public partial class TextEntryBackend : WidgetBackend, ITextEntryBackend
 	{
-		public override void Initialize ()
+        public bool HasCompletions { get; }
+
+        public override void Initialize ()
 		{
 			Widget = new Gtk.Entry ();
 			Widget.Show ();
