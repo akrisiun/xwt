@@ -35,7 +35,7 @@ namespace Xwt.GtkBackend
     {
 		bool isOpen;
 
-        public Color LabelColor { get; set; }
+        // public Color LabelColor { get; set; }
 
         public MenuButtonBackend ()
 		{

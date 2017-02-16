@@ -24,6 +24,7 @@ namespace Gtk
         // make sure Base ddl loaded
         public static void LoadDlls()
         {
+            var dir = AppDomain.CurrentDomain.BaseDirectory;
             try {
                 // Exception thrown: 'System.BadImageFormatException' in cairo3 - sharp.dll
                 var cairo = Cairo.CairoAPI.VersionString;

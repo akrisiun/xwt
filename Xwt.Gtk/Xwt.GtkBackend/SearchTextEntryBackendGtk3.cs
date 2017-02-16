@@ -42,7 +42,7 @@ namespace Xwt.GtkBackend
 			TextEntry.IconRelease += ResetSearch;
 		}
 
-        public bool HasCompletions { get; protected set; }
+        //public bool HasCompletions { get; protected set; }
         //void SetCompletions(string[] completions);
         //void SetCompletionMatchFunc(Func<string, string, bool> matchFunc);
 

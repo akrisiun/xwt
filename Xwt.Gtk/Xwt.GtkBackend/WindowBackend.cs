@@ -39,10 +39,10 @@ namespace Xwt.GtkBackend
         Gtk.VBox mainBox;
 
         // public string Name { get; set; }
-        public IntPtr NativeHandle { get; protected set; }
+        // public IntPtr NativeHandle { get; protected set; }
 
         object IWindowFrameBackend.Window { get { return base.Window; } }
-        public Gtk.Window WindowType { get { return Window as Gtk.Window; } set { base.Window = value as Gtk.Window; } } 
+        // public Gtk.Window WindowType { get { return Window as Gtk.Window; } set { base.Window = value as Gtk.Window; } } 
 
         public override void Initialize()
         {

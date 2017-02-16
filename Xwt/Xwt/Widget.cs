@@ -32,8 +32,7 @@ using System.Collections.Generic;
 using Xwt.Backends;
 
 using Xwt.Drawing;
-using System.Reflection;
-using System.Xaml;
+using System.Diagnostics;
 using System.Linq;
 using Xwt.Motion;
 
@@ -362,7 +361,8 @@ namespace Xwt
 		/// </summary>
 		/// <value>The backend.</value>
 		IWidgetBackend Backend {
-			get { return (IWidgetBackend) BackendHost.Backend; }
+            [DebuggerStepThrough]
+            get { return (IWidgetBackend) BackendHost.Backend; }
 		}
 		
 		/// <summary>

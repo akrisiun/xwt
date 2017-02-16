@@ -54,10 +54,6 @@
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="Xwt3">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Xwt3.dll</HintPath>
-    </Reference>
     <Reference Include="Xwt3.Gtk3">
       <HintPath>..\bin\Xwt3.Gtk3.dll</HintPath>
     </Reference>
@@ -109,6 +105,10 @@
     <ProjectReference Include="..\Xwt.CoreGtk3\CoreGtk3.csproj">
       <Project>{9E4B0803-5255-43AA-9C68-0CBDF76DB564}</Project>
       <Name>CoreGtk3</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xwt\Xwt3.csproj">
+      <Project>{92494904-35fa-4dc9-bde9-3a3e87ac49d3}</Project>
+      <Name>Xwt3</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

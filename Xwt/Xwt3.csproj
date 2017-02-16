@@ -32,9 +32,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Xwt.Backends\IComboBoxCellViewFrontend.cs" />
+    <Compile Include="Xwt.Backends\IDispatcherBackend.cs" />
+    <Compile Include="Xwt.Backends\IFileSelectorBackend.cs" />
+    <Compile Include="Xwt.Backends\IFolderSelectorBackend.cs" />
+    <Compile Include="Xwt.Backends\IFontSelectorBackend.cs" />
     <Compile Include="Xwt.Backends\IPasswordEntryBackend.cs" />
+    <Compile Include="Xwt.Backends\ISelectFontDialogBackend.cs" />
+    <Compile Include="Xwt.Drawing\IImageLoader.cs" />
+    <Compile Include="Xwt.Drawing\StyleSet.cs" />
+    <Compile Include="Xwt.Drawing\ThemedImage.cs" />
+    <Compile Include="Xwt.Formats\MarkupTextFormat.cs" />
+    <Compile Include="Xwt\FileSelector.cs" />
+    <Compile Include="Xwt\FolderSelector.cs" />
+    <Compile Include="Xwt\FontSelector.cs" />
     <Compile Include="Xwt\PasswordEntry.cs" />
+    <Compile Include="Xwt\PreviewTextEventArgs.cs" />
+    <Compile Include="Xwt\SelectFontDialog.cs" />
     <Compile Include="Xwt\TextInputEventArgs.cs" />
+    <Compile Include="Xwt\ToolkitDefaults.cs" />
     <Compile Include="Xwt\Widget.cs" />
     <Compile Include="Xwt\Window.cs" />
     <Compile Include="Xwt\Button.cs" />

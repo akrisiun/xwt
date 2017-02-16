@@ -32,84 +32,88 @@ using Xwt.Backends;
 
 namespace Xwt.GtkBackend
 {
-	class LinkLabelBackend : LabelBackend, ILinkLabelBackend, ILabelBackend
+    class LinkLabelBackend : LabelBackend, ILinkLabelBackend, ILabelBackend
     {
-		Uri uri;
-
-        public bool Selectable { get; set; }
+        Uri uri;
 
         bool ClickEnabled {
-			get; set;
-		}
+            get; set;
+        }
 
-		new ILinkLabelEventSink EventSink {
-			get { return (ILinkLabelEventSink)base.EventSink; }
-		}
+        new ILinkLabelEventSink EventSink {
+            get { return (ILinkLabelEventSink)base.EventSink; }
+        }
 
-		public Uri Uri {
-			get {
-				return uri;
-			}
-			set {
-				uri = value;
-				SetMarkup ();
-			}
-		}
+        public Uri Uri {
+            get {
+                return uri;
+            }
+            set {
+                uri = value;
+                SetMarkup();
+            }
+        }
 
-		public override string Text {
-			get { return base.Text; }
-			set {
-				base.Text = value;
-				SetMarkup ();
-			}
-		}
+        public override string Text {
+            get { return base.Text; }
+            set {
+                base.Text = value;
+                SetMarkup();
+            }
+        }
 
-		public LinkLabelBackend ()
-		{
-			Label.UseMarkup = true;
-			Label.SetLinkHandler (OpenLink);
-		}
+        public LinkLabelBackend()
+        {
+            Label.UseMarkup = true;
+            Label.SetLinkHandler(OpenLink);
+        }
 
-		public override void EnableEvent (object eventId)
-		{
-			base.EnableEvent (eventId);
-			if (eventId is LinkLabelEvent) {
-				switch ((LinkLabelEvent) eventId) {
-				case LinkLabelEvent.NavigateToUrl:
-					ClickEnabled = true;
-					break;
-				}
-			}
-		}
-		
-		public override void DisableEvent (object eventId)
-		{
-			base.DisableEvent (eventId);
-			if (eventId is LinkLabelEvent) {
-				switch ((LinkLabelEvent) eventId) {
-				case LinkLabelEvent.NavigateToUrl:
-					ClickEnabled = false;
-					break;
-				}
-			}
-		}
+        public override void EnableEvent(object eventId)
+        {
+            base.EnableEvent(eventId);
+            if (eventId is LinkLabelEvent)
+            {
+                switch ((LinkLabelEvent)eventId)
+                {
+                    case LinkLabelEvent.NavigateToUrl:
+                        ClickEnabled = true;
+                        break;
+                }
+            }
+        }
 
-		void SetMarkup ()
-		{
-			var text = Label.Text;
-			string url = string.Format ("<a href=\"{1}\">{0}</a>", SecurityElement.Escape (text), uri != null ? SecurityElement.Escape (uri.ToString ()) : "");
-			Label.Markup = url;
-		}
+        public override void DisableEvent(object eventId)
+        {
+            base.DisableEvent(eventId);
+            if (eventId is LinkLabelEvent)
+            {
+                switch ((LinkLabelEvent)eventId)
+                {
+                    case LinkLabelEvent.NavigateToUrl:
+                        ClickEnabled = false;
+                        break;
+                }
+            }
+        }
 
-		void OpenLink (string link)
-		{
-			if (ClickEnabled) {
-				var uri = !string.IsNullOrEmpty (link)? new Uri (link, UriKind.RelativeOrAbsolute) : null;
-				ApplicationContext.InvokeUserCode (() => {
-					EventSink.OnNavigateToUrl (uri);
-				});
-			}
-		}
-	}
+        void SetMarkup()
+        {
+            var text = Label.Text;
+            string url = string.Format("<a href=\"{1}\">{0}</a>", SecurityElement.Escape(text), uri != null ? SecurityElement.Escape(uri.ToString()) : "");
+            Label.Markup = url;
+        }
+
+        void OpenLink(string link)
+        {
+            if (ClickEnabled)
+            {
+                var uri = !string.IsNullOrEmpty(link) ? new Uri(link, UriKind.RelativeOrAbsolute) : null;
+                ApplicationContext.InvokeUserCode(() =>
+                {
+                    EventSink.OnNavigateToUrl(uri);
+                });
+            }
+        }
+    }
 }
 

@@ -7,6 +7,8 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Samples</RootNamespace>
     <AssemblyName>Samples</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -17,6 +19,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -26,6 +29,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <DebugSymbols>true</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -137,27 +141,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="class.png">
-      <LogicalName>class.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="package.png">
-      <LogicalName>package.png</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Samples\cow.jpg">
       <LogicalName>cow.jpg</LogicalName>
       <DeployService-Deploy>True</DeployService-Deploy>
-    </EmbeddedResource>
-    <EmbeddedResource Include="document-generic.png">
-      <LogicalName>document-generic.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="document-generic%402x.png">
-      <LogicalName>document-generic@2x.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="zoom-panel-dark.9.png">
-      <LogicalName>zoom-panel-dark.9.png</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="zoom-panel-dark%402x.9.png">
-      <LogicalName>zoom-panel-dark@2x.9.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="..\..\Testing\Tests\ninep-ss.9.png">
       <Link>Samples\ninep-ss.9.png</Link>
@@ -217,5 +203,7 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
 </Project>

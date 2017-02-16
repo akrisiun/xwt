@@ -52,9 +52,9 @@ namespace Xwt.Drawing
 			if (toolkit != null)
 				ToolkitEngine = toolkit;
 			handler = ToolkitEngine.FontBackendHandler;
-			if (backend == null)
-				throw new ArgumentNullException ("backend");
-			Backend = backend;
+			if (backend != null)
+				//throw new ArgumentNullException ("backend");
+			    Backend = backend;
 		}
 
 		internal void InitForToolkit (Toolkit tk)
