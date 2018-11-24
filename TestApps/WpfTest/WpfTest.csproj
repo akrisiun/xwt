@@ -72,7 +72,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Xwt.WPF\Xwt.WPF.csproj">
-      <Project>{C93D746E-1586-4D4F-B411-BF5A966E6A08}</Project>
+      <Project>{c93d746e-1586-4d4f-b411-bf5a966e6a08}</Project>
       <Name>Xwt.WPF</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xwt\Xwt.csproj">
@@ -89,9 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
