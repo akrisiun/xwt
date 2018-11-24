@@ -30,7 +30,10 @@ namespace GtkDemo
         public static void Main(string[] args)
         {
             DemoMain.DemoError = null;
+            object gtype = null;
             try {
+                gtype = GLib.LoadGlib.GType;
+
                 Application.Init();
                 new DemoMain();
 

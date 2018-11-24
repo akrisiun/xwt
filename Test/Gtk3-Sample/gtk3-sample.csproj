@@ -110,6 +110,14 @@
     <None Include="xwt.snk" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CoreGtk3, Version=3.2.6902.14181, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CoreGtk3.dll</HintPath>
+    </Reference>
+    <Reference Include="gio3-sharp, Version=3.1.6902.14331, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\gio3-sharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -120,14 +128,8 @@
     <Reference Include="cairo3-sharp">
       <HintPath>..\..\lib\cairo3-sharp.dll</HintPath>
     </Reference>
-    <Reference Include="gio3-sharp">
-      <HintPath>..\..\lib\gio3-sharp.dll</HintPath>
-    </Reference>
     <Reference Include="glib3-sharp">
       <HintPath>..\..\lib\glib3-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="CoreGtk3">
-      <HintPath>..\..\lib\CoreGtk3.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Dynamic" />

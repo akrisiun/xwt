@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92494904-35FA-4DC9-BDE9-3A3E87AC49D3}</ProjectGuid>
+    <ProjectGuid>{644B0C8E-8172-41A6-B987-7262373B1FEC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Xwt</RootNamespace>
     <AssemblyName>Xwt</AssemblyName>
