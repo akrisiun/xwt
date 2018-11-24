@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{364577DB-9728-4951-AC2C-EDF7A6FCC09D}</ProjectGuid>
+    <ProjectGuid>{F83810F3-6AD6-4C8F-9EBF-43FFD686EA76}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>cairo</RootNamespace>
     <AssemblyName>cairo3-sharp</AssemblyName>
@@ -34,7 +34,7 @@
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

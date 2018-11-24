@@ -24,3 +24,11 @@ packages/
 lib/*.exe
 UpgradeLog.htm
 .vs*/
+./etc
+./share
+./libexec
+etc/
+lib/*.a
+lib/gdk*
+libexec/
+share/

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{1C3BB17B-336D-432A-8952-4E979BC90867}</ProjectGuid>
+    <ProjectGuid>{387F679E-513B-4E31-9318-6DF8BA0BB94A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>gio</RootNamespace>
     <AssemblyName>gio3-sharp</AssemblyName>
@@ -38,7 +38,7 @@
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

@@ -18,12 +18,12 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\lib\</OutputPath>
+    <OutputPath>..\bin\</OutputPath>
     <DefineConstants>TRACE;DEBUG;NET_4_5;GTK3;X86;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -33,20 +33,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="cairo3-sharp">
-      <HintPath>..\lib\cairo3-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="gio3-sharp">
-      <HintPath>..\lib\gio3-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="glib3-sharp">
-      <HintPath>..\lib\glib3-sharp.dll</HintPath>
+      <HintPath>..\bin\cairo3-sharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
-    </Reference>
-    <Reference Include="atk3-sharp">
-      <HintPath>..\lib\atk3-sharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1354,6 +1346,20 @@
     <None Include="gtk\gui-thread-check\profiler\Makefile.am" />
     <None Include="gtk\gui-thread-check\profiler\Makefile.in" />
     <None Include="xwt.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Base\atk\atk3.csproj">
+      <Project>{eb15b7aa-cc36-4fbc-a254-a9375904a327}</Project>
+      <Name>atk3</Name>
+    </ProjectReference>
+    <ProjectReference Include="Base\gio\gio3.csproj">
+      <Project>{387f679e-513b-4e31-9318-6df8ba0bb94a}</Project>
+      <Name>gio3</Name>
+    </ProjectReference>
+    <ProjectReference Include="Base\glib\glib3.csproj">
+      <Project>{032ffe74-01ef-4a53-b72e-4d90d8cd0fe5}</Project>
+      <Name>glib3</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

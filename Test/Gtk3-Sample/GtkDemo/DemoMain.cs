@@ -19,11 +19,11 @@ namespace GtkDemo
 
 
         private Gtk.Window window;
-        private TextBuffer infoBuffer = new TextBuffer(null);
-        private TextBuffer sourceBuffer = new TextBuffer(null);
+        private TextBuffer infoBuffer;
+        private TextBuffer sourceBuffer;
         private TreeView treeView;
         private TreeStore store;
-        private TreeIter oldSelection = TreeIter.Zero;
+        private TreeIter oldSelection;
 
         public static Exception DemoError { get; set; }
 
@@ -56,6 +56,10 @@ namespace GtkDemo
 
         public DemoMain()
         {
+            infoBuffer = new TextBuffer(IntPtr.Zero);
+            sourceBuffer = new TextBuffer(IntPtr.Zero);
+            oldSelection = TreeIter.Zero;
+
             SetupDefaultIcon();
             window = new Gtk.Window("Gtk# Code Demos");
             window.SetDefaultSize(600, 400);
@@ -70,14 +74,23 @@ namespace GtkDemo
             Notebook notebook = new Notebook();
             hbox.PackStart(notebook, true, true, 0);
 
-            notebook.AppendPage(CreateText(infoBuffer, false), new Label("_Info"));
-            TextTag heading = new TextTag("heading");
-            heading.Font = "Sans 18";
-            infoBuffer.TagTable.Add(heading);
+            try {
+                notebook.AppendPage(CreateText(infoBuffer, false), new Label("_Info"));
+                TextTag heading = new TextTag("heading");
+                heading.Font = "Sans 18";
+                infoBuffer.TagTable.Add(heading);
 
-            notebook.AppendPage(CreateText(sourceBuffer, true), new Label("_Source"));
-
-            window.ShowAll();
+                notebook.AppendPage(CreateText(sourceBuffer, true), new Label("_Source"));
+            }
+            catch (Exception ex) {
+                Console.WriteLine($"Demomain {ex}");
+            }
+            try { 
+                window.ShowAll();
+            }
+            catch (Exception ex) {
+                Console.WriteLine($"Demomain {ex}");
+            }
         }
 
         private void LoadFile(string filename)

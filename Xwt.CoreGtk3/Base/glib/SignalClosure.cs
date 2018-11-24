@@ -123,7 +123,10 @@ namespace GLib {
 		{
 			if (Invoked == null)
 				return;
-			Invoked (this, args);
+            try {
+                Invoked(this, args);
+            }
+            catch (Exception ex) { Console.WriteLine($"SignalClosure.Invoke {ex}"); }
 		}
 
 		static ClosureMarshal marshaler;
@@ -176,9 +179,9 @@ namespace GLib {
 				Value ret = (Value) Marshal.PtrToStructure (return_val, typeof (Value));
 				ret.Val = args.RetVal;
 				Marshal.StructureToPtr (ret, return_val, false);
-			} catch (Exception e) {
+			} catch (Exception) {
 				Console.WriteLine (message);
-				ExceptionManager.RaiseUnhandledException (e, false);
+				// ExceptionManager.RaiseUnhandledException (e, false);
 			}
 		}
 

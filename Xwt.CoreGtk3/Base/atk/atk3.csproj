@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{42FE871A-D8CF-4B29-9AFF-B02454E6C976}</ProjectGuid>
+    <ProjectGuid>{EB15B7AA-CC36-4FBC-A254-A9375904A327}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>atk</RootNamespace>
     <AssemblyName>atk3-sharp</AssemblyName>
@@ -38,7 +38,7 @@
     <DefineConstants>TRACE;DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>

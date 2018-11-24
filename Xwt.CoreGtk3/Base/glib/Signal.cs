@@ -196,8 +196,14 @@ namespace GLib {
 			else
 				handler = after_handler;
 
-			if (handler != null)
-				handler.DynamicInvoke (new object[] {args.Target, args.Args});
+            if (handler != null) {
+                try {
+                    handler.DynamicInvoke(new object[] { args.Target, args.Args });
+                }
+                catch (Exception ex) {
+                    Console.WriteLine($"Signal.ClosuerInvokeCB {ex}");
+                }
+            }
 		}
 
 		ClosureInvokedHandler closure_invoked_cb;

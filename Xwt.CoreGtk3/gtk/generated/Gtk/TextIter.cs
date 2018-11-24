@@ -878,11 +878,19 @@ namespace Gtk {
 		public int Offset { 
 			get {
 				IntPtr this_as_native = System.Runtime.InteropServices.Marshal.AllocHGlobal (System.Runtime.InteropServices.Marshal.SizeOf (this));
-				System.Runtime.InteropServices.Marshal.StructureToPtr (this, this_as_native, false);
-				int raw_ret = gtk_text_iter_get_offset(this_as_native);
-				int ret = raw_ret;
-				ReadNative (this_as_native, ref this);
-				System.Runtime.InteropServices.Marshal.FreeHGlobal (this_as_native);
+                int ret = 0;
+                try {
+                    System.Runtime.InteropServices.Marshal.StructureToPtr(this, this_as_native, false);
+                    int raw_ret = gtk_text_iter_get_offset(this_as_native);
+                    ret = raw_ret;
+                    ReadNative(this_as_native, ref this);
+                    System.Runtime.InteropServices.Marshal.FreeHGlobal(this_as_native);
+                }
+                catch (Exception ex) {
+                    ex = ex.InnerException ?? ex;
+                    Console.WriteLine($"TExtIter Offset fails: {ex}");
+                    // Attempted to read or write protected memory. 
+                }
 				return ret;
 			}
 			set {

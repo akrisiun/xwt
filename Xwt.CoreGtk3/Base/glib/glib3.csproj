@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{3BF1D531-8840-4F15-8066-A9788D8C398B}</ProjectGuid>
+    <ProjectGuid>{032FFE74-01EF-4A53-B72E-4D90D8CD0FE5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>glib</RootNamespace>
     <AssemblyName>glib3-sharp</AssemblyName>
@@ -34,7 +34,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
